@@ -1,15 +1,20 @@
 /* NAVBAR WRAPPER */
+
+
+
 .navbar {
   position: sticky;
   top: 0;
-  background: #e9eae8; /* dark navbar like inspo */
   padding: 0.75rem 1.5rem;
   z-index: 1000;
+  background-color: var(--nav-color);
   /* box-shadow: 0 2px 8px rgba(0,0,0,0.35); */
+  color: var(--text-color);
 }
 
 /* FLEX CONTAINER */
 .nav-container {
+
   list-style: none;
   display: flex;
   justify-content: space-between; /* left - center - right */
@@ -33,21 +38,24 @@
 }
 
 .nav-title {
-  color: #194F7B;
+  color: var(--nav-title-color);
   font-weight: 700;
   font-size: 1.2rem;
 }
 
 /* CENTER MENU */
 .nav-center {
-  color: #194F7B;
+  color: var(--nav-title-color);
   font-size: 1rem;
 }
 
 .nav-center input[type=text] {
   float: right;
   padding: 6px;
-  border: none;
+  background-color: var(--background-color); /* Dark box in dark mode */
+  color: var(--text-color);                /* White text */
+  border: 1px solid #555;                  /* Subtle border to see the box */
+  border-radius: 4px;                      /* Makes it look cleaner */
   /* margin-top: 8px; */
   /* margin-right: 16px; */
   font-size: 14px;
@@ -61,11 +69,16 @@
   gap: 1rem;
 }
 
+.navbar a {
+  color: inherit; 
+  text-decoration: none;
+}
+
 /* THEME BUTTON */
 .theme-btn {
   padding: 0.4rem 0.9rem;
   border: none;
-  background: #194F7B;
+  background: var(--btn-bg);
   color: white;
   border-radius: 8px;
   cursor: pointer;
@@ -73,5 +86,5 @@
 }
 
 .theme-btn:hover {
-  background: #6AB04C;
+  filter: brightness(1.1);
 }

@@ -1,0 +1,92 @@
+/* --- 1. Card List Container --- */
+.category-card-list {
+  /* Enables responsive grid layout for the cards */
+  display: grid;
+  /* Creates columns that fit as many cards as possible, minimum size 300px */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px; /* Space between the cards */
+  padding: 20px 0;
+}
+
+/* --- 2. Individual Category Card --- */
+.category-card {
+  /* A nice card-like appearance */
+  display: flex; /* Use flexbox for internal layout */
+  align-items: center; /* Vertically center items */
+  padding: 15px 20px;
+  /* background-color: #ffffff;  */
+  border: 1px solid #e0e0e0; /* Subtle border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+  transition: transform 0.2s; /* Smooth hover effect */
+}
+
+.category-card:hover {
+  transform: translateY(-2px); /* Lift the card slightly on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 3. Colored Indicator (Circle) --- */
+.category-indicator {
+  width: 15px;
+  height: 15px;
+  /* The color must be applied inline in your React component using category.color */
+  border-radius: 50%; /* Makes it a circle */
+  margin-right: 15px;
+  /* Example style if color is applied inline: style={{ backgroundColor: category.color }} */
+}
+
+/* --- 4. Details (Name and Budget) --- */
+.category-details {
+  /* Takes up maximum available space */
+  flex-grow: 1;
+  margin-right: 15px;
+}
+
+.category-details h4 {
+  margin: 0 0 4px 0; /* Category Name */
+  font-size: 1.1em;
+  color: var(--text-color);
+}
+
+.category-details p {
+  margin: 0; /* Budget Limit */
+  font-size: 0.9em;
+  color: var(--text-color);
+}
+
+/* --- 5. Action Buttons --- */
+.category-actions {
+  /* Container for the buttons */
+  display: flex;
+  gap: 10px; /* Space between buttons */
+}
+
+.category-actions button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+/* Edit Button Style */
+.category-actions .edit-btn {
+  background-color: #2196f3; /* Blue */
+  color: white;
+}
+
+.category-actions .edit-btn:hover {
+  background-color: #0b7dda;
+}
+
+/* Delete Button Style */
+.category-actions .delete-btn {
+  background-color: #f44336; /* Red */
+  color: white;
+}
+
+.category-actions .delete-btn:hover {
+  background-color: #d32f2f;
+}

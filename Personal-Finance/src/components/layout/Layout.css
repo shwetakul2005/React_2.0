@@ -1,3 +1,84 @@
+/* layout.css - At the very top */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding doesn't break layouts */
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Prevents accidental side scrolling */
+  /* This applies the font to the entire website */
+  font-family: 'Inter', sans-serif;
+  
+  /* Makes the font look sharper on modern screens */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.light {
+  /* --- Existing Light Variables --- */
+  --background-color: white;
+  --text-color: black;
+  --nav-color: #9ed467;
+  --nav-title-color: #194F7B;
+  
+  /* --- NEW: Sidebar Variables (based on your old hardcoded values) --- */
+  --sidebar-bg: #ece7e7;
+  --sidebar-border: #F4F6F8;
+  --sidebar-text: #444;
+  --sidebar-hover-bg: #f5f7fa;
+  --sidebar-active-bg: #e8f0fe;
+  --sidebar-active-text: #1a73e8;
+  --btn-bg: #194F7B; /* For the theme button */
+
+  /* --- NEW: Transaction Card Variables --- */
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0; /* Light gray border */
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --success-color: #16a34a; /* Green for income */
+  --danger-color: #dc2626;  /* Red for expense/delete */
+}
+   
+html.dark {
+  /* --- NEW: Dark Theme Variables (From your image) --- */
+  --background-color: #1E1E1E;  /* Dynamic Black */
+  --text-color: #F0F2F0;        /* Beluga */
+  --nav-color: #060C06;         /* Whiten't (Deepest Black) */
+  --nav-title-color: #3b8f38;   /* Koopa Green Shell */
+
+  /* --- NEW: Sidebar Dark Variables --- */
+  --sidebar-bg: #060C06;        /* Whiten't */
+  --sidebar-border: #3E3F3E;    /* Black Lacquer */
+  --sidebar-text: #F0F2F0;      /* Beluga */
+  --sidebar-hover-bg: #3E3F3E;  /* Black Lacquer */
+  --sidebar-active-bg: #54C750; /* Koopa Green Shell */
+  --sidebar-active-text: #060C06; /* Dark text on green button */
+  --btn-bg: #54C750;
+
+  /* --- NEW: Transaction Card Dark Variables --- */
+  --card-bg: #2C2C2C; /* Slightly lighter than background */
+  --card-border: #3E3F3E;
+  --card-shadow: none;
+  --success-color: #54C750;
+  --danger-color: #ff6b6b;
+}
+
+h1, h2, h3, .nav-title, .sidebar a {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600; /* Semi-bold for a clean look */
+  letter-spacing: -0.02em; /* Slight tightening makes it look more premium */
+}
+
+/* Make the page title specifically pop */
+h1 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -7,14 +88,16 @@
 .main_content {
   display: flex;
   flex: 1;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .page_content {
   flex: 1;
+  flex-direction: row;
   padding: 2rem;
   overflow-y: auto;
-  background: #FFFFFF;
+  background: var(--background-color);
+  color: var(--text-color);
 }
 
 @media (max-width: 768px) {
@@ -22,4 +105,5 @@
     padding: 1rem;
   }
 }
+
 

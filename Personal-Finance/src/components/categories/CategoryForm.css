@@ -1,0 +1,114 @@
+/* =========================================
+   Category Form Container
+   ========================================= */
+.category-form {
+  /* Use Flexbox to stack items vertically */
+  display: flex;
+  flex-direction: column;
+  /* Adds space between inputs automatically (replaces your empty divs) */
+  gap: 1.25rem; 
+  
+  /* Card Styling */
+  background-color: var(--background-color);
+  border: 1px solid var(--sidebar-border);
+  border-radius: 12px;
+  padding: 2rem;
+  
+  /* Size constraints */
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto; /* Centers the form horizontally */
+  
+  /* Subtle Shadow */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Hide the empty spacer divs from the React code */
+.category-form > div {
+  display: none;
+}
+
+/* =========================================
+   Labels
+   ========================================= */
+.category-form label {
+  display: flex;
+  flex-direction: column; /* Puts text above input */
+  gap: 0.5rem; /* Space between text and input box */
+  
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-color);
+  text-transform: capitalize; /* "enter name" -> "Enter Name" */
+}
+
+/* =========================================
+   Inputs & Select Dropdown
+   ========================================= */
+.category-form input,
+.category-form select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: inherit; /* Uses Inter from layout.css */
+  
+  /* Theme Colors */
+  color: var(--text-color);
+  background-color: var(--background-color);
+  border: 1px solid var(--sidebar-border);
+  border-radius: 8px;
+  
+  transition: all 0.2s ease;
+  
+  /* specific fix for browser autofill background colors */
+  box-shadow: inset 0 0 0 30px var(--background-color); 
+  -webkit-text-fill-color: var(--text-color);
+}
+
+/* Focus State (Active Input) */
+.category-form input:focus,
+.category-form select:focus {
+  outline: none;
+  /* Highlights border with your theme color (Blue/Green) */
+  border-color: var(--nav-title-color); 
+  /* Optional: adds a glow effect */
+  box-shadow: 0 0 0 3px rgba(84, 199, 80, 0.15);
+}
+
+/* Placeholder styling */
+.category-form input::placeholder {
+  color: var(--sidebar-text);
+  opacity: 0.7;
+}
+
+/* =========================================
+   Submit Button
+   ========================================= */
+.category-form button[type="submit"] {
+  margin-top: 1rem;
+  padding: 0.85rem;
+  
+  /* Uses Theme Primary Color */
+  background-color: var(--nav-title-color);
+  color: #ffffff; /* White text looks best on deep blue/green */
+  
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+html.dark .category-form button[type="submit"] {
+    color: var(--background-color); /* Black text on bright green button */
+}
+
+.category-form button[type="submit"]:hover {
+  opacity: 0.9;
+}
+
+.category-form button[type="submit"]:active {
+  transform: scale(0.98);
+}

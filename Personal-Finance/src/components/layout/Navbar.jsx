@@ -26,7 +26,7 @@ const NavBar = () => {
 
     <li className="nav-right">
       <span>ProfilePic</span>
-      <button className="theme-btn" onClick={themeToggle}>Theme</button>
+      {/* <button className="theme-btn" onClick={themeToggle}>Theme</button> */}
       <ThemeBtn />
     </li>
 

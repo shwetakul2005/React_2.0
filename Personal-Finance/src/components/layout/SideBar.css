@@ -1,15 +1,17 @@
 /* --- Sidebar Container --- */
 .sidebar {
   width: 240px;
-  background: #ece7e7;
-  border-right: 1px solid #F4F6F8;
-  height: 100vh;
+  min-width: 240px; /* Prevent shrinking */
+  flex-shrink: 0; /* Don't shrink in flex container */
+  background: var(--sidebar-bg);
+  /* border-right: 1px solid var(--sidebar-border); */
   padding: 20px 0;
-  position: sticky;
-  top: 0;
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease;
+  color: var(--sidebar-text);
+  overflow-y: auto; /* Allow scrolling if content is too tall */
+  /* REMOVED: height: 100vh, position: sticky, top: 0 */
 }
 
 /* Mobile hidden state */
@@ -37,7 +39,7 @@
   display: block;
   padding: 12px 20px;
   text-decoration: none;
-  color: #444;
+  color: var(--sidebar-text);
   font-size: 16px;
   border-left: 4px solid transparent;
   transition: all 0.25s ease;
@@ -45,21 +47,20 @@
 
 /* Hover effect */
 .sidebar a:hover {
-  background: #f5f7fa;
-  color: #111;
+  background: var(--sidebar-hover-bg);
+  color: var(--text-color);
 }
 
 /* Active link styling */
 .sidebar a.active {
-  background: #e8f0fe;
-  color: #1a73e8;
+  background: var(--sidebar-active-bg);
+  color: var(--sidebar-active-text);
   font-weight: 600;
-  border-left: 4px solid #1a73e8;
+  border-left: 4px solid var(--nav-title-color);
 }
 
 /* --- RESPONSIVENESS --- */
 @media (max-width: 768px) {
-
   .sidebar {
     position: fixed;
     height: 100vh;

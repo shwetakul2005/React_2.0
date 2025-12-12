@@ -1,0 +1,228 @@
+## **High-Level Pages/Views**
+
+### 1. **Dashboard (Home)**
+The main view with overview cards and charts
+- Total balance summary
+- Income vs Expenses this month
+- Spending by category (pie/donut chart)
+- Recent transactions list
+- Spending trends over time (line chart)
+
+### 2. **Transactions Page**
+Where users view and manage all transactions
+- Filterable/searchable transaction list
+- Add new transaction form
+- Edit/delete existing transactions
+- Bulk import from CSV
+
+### 3. **Categories Page**
+Manage spending categories
+- List of all categories (Food, Transport, Entertainment, etc.)
+- Add/edit/delete categories
+- Set budget limits per category
+- View spending per category
+
+### 4. **Budget Page**
+Set and track budgets
+- Monthly budget overview
+- Budget vs actual spending comparison
+- Progress bars for each category
+- Alerts when approaching/exceeding budget
+
+### 5. **AI Insights Page**
+The standout feature!
+- Generate insights about spending patterns
+- Ask questions about your finances
+- Get recommendations
+- View historical insights
+
+### 6. **Reports Page** (optional but impressive)
+- Monthly/yearly summaries
+- Export data
+- Downloadable reports
+
+---
+
+## **Project Structure**
+
+```
+src/
+├── components/
+│   ├── common/              # Reusable components
+│   │   ├── Button.jsx
+│   │   ├── Card.jsx
+│   │   ├── Modal.jsx
+│   │   └── Input.jsx
+│   │
+│   ├── layout/              # Layout components
+│   │   ├── Navbar.jsx
+│   │   ├── Sidebar.jsx
+│   │   └── Layout.jsx
+│   │
+│   ├── transactions/        # Transaction-specific
+│   │   ├── TransactionList.jsx
+│   │   ├── TransactionItem.jsx
+│   │   ├── TransactionForm.jsx
+│   │   └── TransactionFilters.jsx
+│   │
+│   ├── dashboard/           # Dashboard-specific
+│   │   ├── SummaryCard.jsx
+│   │   ├── SpendingChart.jsx
+│   │   └── RecentTransactions.jsx
+│   │
+│   ├── categories/
+│   │   ├── CategoryList.jsx
+│   │   └── CategoryForm.jsx
+│   │
+│   └── insights/
+│       ├── InsightCard.jsx
+│       └── ChatInterface.jsx
+│
+├── pages/
+│   ├── Dashboard.jsx
+│   ├── Transactions.jsx
+│   ├── Categories.jsx
+│   ├── Budget.jsx
+│   ├── Insights.jsx
+│   └── Reports.jsx
+│
+├── hooks/                   # Custom React hooks
+│   ├── useTransactions.js
+│   ├── useCategories.js
+│   └── useLocalStorage.js
+│
+├── context/                 # Context API for state
+│   ├── FinanceContext.jsx
+│   └── ThemeContext.jsx
+│
+├── utils/                   # Helper functions
+│   ├── calculations.js      # Sum, average, grouping logic
+│   ├── dateHelpers.js
+│   └── csvParser.js
+│
+├── App.jsx
+└── main.jsx
+```
+
+---
+
+## **Building Approach - Step by Step**
+
+### **Phase 1: Foundation (Week 1)**
+1. **Set up basic React app** with Vite
+2. **Install dependencies**: React Router, Recharts (for charts)
+3. **Create basic routing** between pages
+4. **Build Layout component** with Navbar/Sidebar
+5. **Set up Context API** for global state management
+
+**Goal:** Navigate between empty pages with a layout
+
+---
+
+### **Phase 2: Data Layer (Week 2)**
+1. **Design your data structure**
+   ```javascript
+   transaction = {
+     id, amount, category, date, description, type (income/expense)
+   }
+   category = {
+     id, name, color, budgetLimit
+   }
+   ```
+
+2. **Create Context for transactions and categories**
+3. **Build custom hooks** (`useTransactions`, `useCategories`)
+4. **Implement localStorage** to persist data
+5. **Create helper functions** (sum transactions, group by category, etc.)
+
+**Goal:** Can add/store transactions in memory and localStorage
+
+---
+
+### **Phase 3: Core Features (Week 3-4)**
+1. **Build Transaction Form** (add/edit)
+2. **Build Transaction List** with display
+3. **Implement Categories** management
+4. **Add filtering/searching** to transactions
+5. **Build CSV import** functionality
+
+**Goal:** Fully functional CRUD for transactions and categories
+
+---
+
+### **Phase 4: Visualization (Week 5)**
+1. **Dashboard summary cards** (total income, expenses, balance)
+2. **Pie chart** for spending by category (use Recharts)
+3. **Line chart** for spending over time
+4. **Budget progress bars**
+
+**Goal:** Visual dashboard that updates with your data
+
+---
+
+### **Phase 5: AI Integration (Week 6)**
+1. **Set up Claude API calls** (you'll need an API key)
+2. **Create insights generator** that analyzes transaction data
+3. **Build chat interface** for asking questions
+4. **Format AI responses** nicely
+
+**Goal:** Working AI that gives spending insights
+
+---
+
+### **Phase 6: Polish (Week 7)**
+1. **Add loading states**
+2. **Error handling**
+3. **Form validation**
+4. **Responsive design** basics
+5. **Export data** functionality
+
+---
+
+## **Key React Concepts You'll Learn**
+
+1. **State Management**: useState, useContext, useReducer
+2. **Side Effects**: useEffect for localStorage, API calls
+3. **Custom Hooks**: Reusable logic
+4. **Component Composition**: Breaking UI into pieces
+5. **Props drilling** vs **Context API**
+6. **Controlled components** (forms)
+7. **Conditional rendering**
+8. **Lists and keys**
+9. **Event handling**
+
+---
+
+## **Starting Point - What to Build First?**
+
+**Day 1-2:**
+- Set up React app
+- Create basic routing
+- Build simple Navbar with links
+
+**Day 3-4:**
+- Create FinanceContext
+- Add a transaction form
+- Console.log the data to see it working
+
+**Day 5-6:**
+- Display transactions in a list
+- Add delete functionality
+
+**Day 7:**
+- Implement localStorage to persist data
+
+---
+
+## **Pro Tips**
+
+1. **Start SMALL** - Get one feature working completely before moving on
+2. **Console.log everything** - See your data flow
+3. **Use React DevTools** - Inspect components and state
+4. **Don't worry about CSS initially** - Use Tailwind or basic styling
+5. **Test as you go** - Add a transaction, see if it appears, delete it, refresh page
+6. **Commit often to Git** - Every working feature
+
+---
+
+Want me to help you think through any specific part? Like how to structure your Context, or how the transaction form should work, or how to calculate category totals? I can guide you through the logic without giving you code!

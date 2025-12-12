@@ -2,40 +2,44 @@ import NavBar from './Navbar'
 import SideBar from './Sidebar'
 import './Layout.css'
 import { ThemeProvider } from '../../context/ThemeContext'
-import { useEffect } from 'react'
-import ThemeBtn from './ThemeBtn'
+import { useEffect, useState } from 'react'
+
 function Layout({ children }) {
+  // console.log("Layout rendering!")
+  const [themeMode, setThemeMode] = useState("light")
+  // console.log("Theme mode:", themeMode)
+  const lightTheme = () => {
+    // console.log("Light theme function called")
+    setThemeMode("light")
+  }
 
-  // const [themeMode, setThemeMode] = useState("light")
+  const darkTheme = () => {
+    // console.log("Dark theme function called")
+    setThemeMode("dark")
+  }
 
-  // const lightTheme = () => {
-  //   setThemeMode("light")
-  // }
+  //actual change in theme
+  useEffect(() => {
+    // console.log("useEffect running, themeMode:", themeMode)
+    document.querySelector('html').classList.remove("light", "dark")
+    document.querySelector('html').classList.add(themeMode)
+  }, [themeMode])
 
-  // const darkTheme = () => {
-  //   setThemeMode("dark")
-  // }
-
-  // //actual change in theme
-
-  // useEffect(() => {
-  //   document.querySelector('html').classList.remove("light", "dark")
-  //   document.querySelector('html').classList.add(themeMode)
-  // }, [themeMode])
+  // console.log("About to return JSX")
 
   return (
-    // <ThemeProvider value={{themeMode, darkTheme, lightTheme}}>
+    <ThemeProvider value={{themeMode, darkTheme, lightTheme}}>
     
-    <div className='content'>
-      <NavBar />
-      <div className='main_content'>
-        <SideBar />
-        <div className='page_content'>
-            {children}
+      <div className='content'>
+        <NavBar />
+        <div className='main_content'>
+          <SideBar />
+          <div className='page_content'>
+              {children}
+          </div>
         </div>
       </div>
-    </div>
-    // </ThemeProvider>
+    </ThemeProvider>
     
   )
 }

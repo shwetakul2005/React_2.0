@@ -1,0 +1,82 @@
+/* --- Form Container --- */
+.transaction-form {
+  max-width: 500px;
+  margin: 2rem 0; /* Spacing from the top */
+  padding: 2rem;
+  
+  /* Makes the form look like a distinct "card" */
+  background: var(--background-color); 
+  border: 1px solid var(--sidebar-border);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Labels --- */
+.transaction-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color); /* Adapts to theme */
+  text-transform: capitalize; /* "enter amount" -> "Enter Amount" */
+}
+
+/* --- Inputs & Selects (The important part for Dark Mode) --- */
+.transaction-form input,
+.transaction-form select {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  outline: none;
+  width: 100%;
+  font-family: 'Inter', sans-serif; /* Matches your new font */
+  
+  /* THEME ADAPTATION */
+  background-color: var(--sidebar-bg); /* Dark in dark mode, Light gray in light mode */
+  color: var(--text-color);            /* White text in dark mode */
+  border: 1px solid var(--sidebar-border);
+  
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Focus State (When you click an input) */
+.transaction-form input:focus,
+.transaction-form select:focus {
+  border-color: var(--nav-title-color); /* Green in dark, Blue in light */
+  box-shadow: 0 0 0 3px rgba(84, 199, 80, 0.15); /* Subtle glow */
+}
+
+/* --- Submit Button --- */
+.transaction-form button[type="submit"] {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  
+  /* Uses your theme button variables */
+  background-color: var(--nav-title-color); 
+  color: #fff; /* Always white text on the button */
+  
+  transition: filter 0.2s ease, transform 0.1s ease;
+}
+
+.transaction-form button[type="submit"]:hover {
+  filter: brightness(1.1);
+}
+
+.transaction-form button[type="submit"]:active {
+  transform: scale(0.98);
+}
+
+/* --- Utility for your spacers --- */
+/* You had <div></div> spacers in your JSX. This handles them gracefully */
+.transaction-form > div {
+  height: 0; /* We handle spacing via margin-bottom on labels instead */
+}
