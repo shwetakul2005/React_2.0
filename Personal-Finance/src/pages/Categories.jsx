@@ -26,6 +26,12 @@ const Categories = () => {
     return (
       <div className='page_content'>
         <h1>Categories here</h1>  
+         <button 
+            className="add-btn" 
+            onClick={() => setShowForm(!showForm)}
+         >
+            {showForm ? "Cancel Transaction" : "+ Add New Category"}
+         </button>
 
         {/* <h3>Categories: </h3> */}
         
@@ -70,12 +76,7 @@ const Categories = () => {
               </div>
             </div>
           ))}
-          <button 
-            className="add-btn" 
-            onClick={() => setShowForm(!showForm)}
-         >
-            {showForm ? "Cancel Transaction" : "+ Add New Category"}
-         </button>
+         
         </div>
         {showForm && (
             <div className="form-wrapper">

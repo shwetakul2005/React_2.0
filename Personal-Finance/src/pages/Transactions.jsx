@@ -29,8 +29,8 @@ const Transactions = () => {
     
         <h1 className="transactions-header">Transactions here</h1>  
         <div className="balance-stats">
-            <h2>Your current Balance is: ${balance}</h2>
-            <h2>Your Total Expense is ${totalExpense}</h2>
+            <h2>Your current Balance is: ₹{balance}</h2>
+            <h2>Your Total Expense is ₹{totalExpense}</h2>
         </div>
         <div className='controls-wrapper'>
             <div className='search-box'>

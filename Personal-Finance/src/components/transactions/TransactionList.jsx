@@ -29,7 +29,7 @@ const TransactionList = (props) => {
                          color: transaction.type === 'income' ? 'green' : 'red', 
                          fontWeight: 'bold' 
                      }}>
-                         ${transaction.amount}
+                        {` ₹${transaction.amount}`}
                      </span>
                  </p>
                  <p>Category: {transaction.category}</p>
