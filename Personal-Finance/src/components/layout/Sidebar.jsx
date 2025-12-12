@@ -35,14 +35,14 @@ const SideBar = () => {
       </ul>
     </nav>
 
-    <Routes>
+    {/* <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/budget" element={<Budget />} />
         <Route path="/insights" element={<Insights />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/categories" element={<Categories />} />
-      </Routes>
+      </Routes> */}
     </>
   );
 };

@@ -23,8 +23,10 @@ const Transactions = () => {
         category: selectedCategory, 
         type: selectedType 
     })
+
    return (
-       <div className='page_content'>
+    <>
+    
         <h1 className="transactions-header">Transactions here</h1>  
         <div className="balance-stats">
             <h2>Your current Balance is: ${balance}</h2>
@@ -77,7 +79,7 @@ const Transactions = () => {
             <button 
                 className="add-btn" 
                 onClick={() => setShowForm(!showForm)}
-            >
+                >
                 {showForm ? "Cancel Transaction" : "+ Add New Transaction"}
             </button>
 
@@ -90,7 +92,8 @@ const Transactions = () => {
         </div>
         {/* {console.log(filterResult)} */}
         <TransactionList  transactions={filterResult.transactions}/>
-      </div>
+    
+            </>
    );
 };
  

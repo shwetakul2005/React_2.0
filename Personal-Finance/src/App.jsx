@@ -5,6 +5,11 @@ import Layout from './components/layout/Layout'
 import Budget from './pages/Budget'
 import { FinanceContextProvider } from './context/FinanceContext'
 import Transactions from './pages/Transactions'
+import { BrowserRouter } from 'react-router-dom'
+import { Route ,Routes } from 'react-router-dom'
+import Categories from './pages/Categories'
+import Insights from './pages/Insights'
+import Reports from './pages/Reports'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,10 +17,17 @@ function App() {
   return (
     <FinanceContextProvider>
 
-      <Layout>
-        {/* <h1>Hello! I am the page content</h1>
-        <p>This should appear in the content area</p> */}
-      </Layout>  
+        <Layout>
+          <Routes>
+            <Route path="/" element={<h1>Welcome to PocketPal</h1>} />
+            <Route path="/budget" element={<Budget />} />
+            <Route path="/transactions" element={<Transactions />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/insights" element={<Insights />} />
+            <Route path="/reports" element={<Reports />} />
+          </Routes>
+        </Layout>
+  
     
     </FinanceContextProvider>
     
