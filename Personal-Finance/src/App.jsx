@@ -10,6 +10,7 @@ import { Route ,Routes } from 'react-router-dom'
 import Categories from './pages/Categories'
 import Insights from './pages/Insights'
 import Reports from './pages/Reports'
+import Dashboard from './pages/Dashboard'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,7 +20,7 @@ function App() {
 
         <Layout>
           <Routes>
-            <Route path="/" element={<h1>Welcome to PocketPal</h1>} />
+            <Route path="/" element={<Dashboard />} />
             <Route path="/budget" element={<Budget />} />
             <Route path="/transactions" element={<Transactions />} />
             <Route path="/categories" element={<Categories />} />

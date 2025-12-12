@@ -7,8 +7,8 @@ const FinanceContext = createContext()
 // passing various methods and data
 function FinanceContextProvider({children}){
     const [transactions, setTransactions] = useState([
-        {id: 1, amount:6000, category:'twitter_payout', date:"10/12/2025", description: "twitter checkout", type: "income"},
-        {id: 2, amount:300, category:'food', date:"10/12/2025", description: "burger", type: "expense"}
+        {id: 1, amount:6000, category:'twitter_payout', date:"2025-11-13", description: "twitter checkout", type: "income"},
+        {id: 2, amount:300, category:'food', date:"2025-11-15", description: "burger", type: "expense"}
     ])
     const [categories, setCategories] = useState([
         { id: 1, name: 'Food', color: '#ff6b6b', budgetLimit: 500},
