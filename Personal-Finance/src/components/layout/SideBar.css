@@ -1,0 +1,73 @@
+/* --- Sidebar Container --- */
+.sidebar {
+  width: 240px;
+  background: #ece7e7;
+  border-right: 1px solid #F4F6F8;
+  height: 100vh;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+/* Mobile hidden state */
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+/* --- Sidebar Nav --- */
+.sidebar nav {
+  flex-grow: 1;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin: 12px 0;
+}
+
+/* --- NavLink Styling --- */
+.sidebar a {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: #444;
+  font-size: 16px;
+  border-left: 4px solid transparent;
+  transition: all 0.25s ease;
+}
+
+/* Hover effect */
+.sidebar a:hover {
+  background: #f5f7fa;
+  color: #111;
+}
+
+/* Active link styling */
+.sidebar a.active {
+  background: #e8f0fe;
+  color: #1a73e8;
+  font-weight: 600;
+  border-left: 4px solid #1a73e8;
+}
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 768px) {
+
+  .sidebar {
+    position: fixed;
+    height: 100vh;
+    z-index: 999;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}

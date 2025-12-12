@@ -1,0 +1,25 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main_content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.page_content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  background: #FFFFFF;
+}
+
+@media (max-width: 768px) {
+  .page_content {
+    padding: 1rem;
+  }
+}
+

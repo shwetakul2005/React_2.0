@@ -1,0 +1,77 @@
+/* NAVBAR WRAPPER */
+.navbar {
+  position: sticky;
+  top: 0;
+  background: #e9eae8; /* dark navbar like inspo */
+  padding: 0.75rem 1.5rem;
+  z-index: 1000;
+  /* box-shadow: 0 2px 8px rgba(0,0,0,0.35); */
+}
+
+/* FLEX CONTAINER */
+.nav-container {
+  list-style: none;
+  display: flex;
+  justify-content: space-between; /* left - center - right */
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* LEFT SIDE (LOGO + TITLE) */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-logo {
+  height: 50px;
+  width: auto;
+  /* object-fit: cover;    ensures proper cropping */
+  /* border-radius: 50%; */
+}
+
+.nav-title {
+  color: #194F7B;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+/* CENTER MENU */
+.nav-center {
+  color: #194F7B;
+  font-size: 1rem;
+}
+
+.nav-center input[type=text] {
+  float: right;
+  padding: 6px;
+  border: none;
+  /* margin-top: 8px; */
+  /* margin-right: 16px; */
+  font-size: 14px;
+  outline: none;
+}
+
+/* RIGHT SIDE (PROFILE + THEME BUTTON) */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* THEME BUTTON */
+.theme-btn {
+  padding: 0.4rem 0.9rem;
+  border: none;
+  background: #194F7B;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.theme-btn:hover {
+  background: #6AB04C;
+}
