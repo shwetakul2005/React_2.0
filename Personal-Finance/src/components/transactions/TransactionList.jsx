@@ -4,15 +4,18 @@ import useTransactions from "../../hooks/useTransactions";
 import { TransactionItem } from "./TransactionItem";
 
 
-const TransactionList = () => {
-    const { transactions, deleteTransaction } = useFinance();
-    if (transactions.length === 0){
+const TransactionList = (props) => {
+    const filtered_transactions = props.transactions;
+    const {deleteTransaction } = useFinance();
+    
+    // const transactions_to_display = filtered_transactions ;
+    if (filtered_transactions === null){
         return <p>No transactions yet. Add your first one!</p>
     }
 
     return (
         <>
-        {transactions.map((transaction) => (
+        {filtered_transactions.map((transaction) => (
             // **Key Point:** Every item in a mapped list must have a unique 'key' prop.
              <div key={transaction.id} style={{ 
                  border: '1px solid #ccc', 
@@ -43,11 +46,11 @@ const TransactionList = () => {
                         }
                      }}
                  >
-                     Delete
+                    Delete
                  </button>
              </div>
             
-         ))}
+        ))}
 
         </>
     )

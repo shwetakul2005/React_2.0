@@ -2,7 +2,7 @@ import { useFinance } from "../context/FinanceContext";
 
 export default function useTransactions(filters = {}) {
     const {transactions} = useFinance()
-    const { category = null, type = null } = filters
+    const { searchTerm="", category = "", type = "" } = filters
 
     // const {startDate, endDate} = date
 
@@ -10,11 +10,15 @@ export default function useTransactions(filters = {}) {
     // if(date) {
     //     filtered = filtered.filter(t => ((t.date >= endDate) && (t.date >= startDate) ))
     // }
-    if(category){
-        filtered = filtered.filter(t => t.category === category)
-
+    // console.log("search from usetransac:",searchTerm)
+    if(searchTerm !== ""){
+        filtered = filtered.filter(t => t.description.toLowerCase().includes(searchTerm.toLowerCase()))
     }
-    if(type) {
+    if(category !== ""){
+        filtered = filtered.filter(t => t.category === category)
+        // console.log("category from usetransac:",category)
+    }
+    if(type != "") {
         filtered = filtered.filter(t => t.type === type)
     }
 
