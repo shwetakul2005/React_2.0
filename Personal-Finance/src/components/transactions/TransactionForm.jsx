@@ -5,7 +5,7 @@ import './TransactionForm.css'
 const TransactionForm = () => {
     const [amount, setAmount] = useState("")
     const [description, setDescription] = useState("")
-    const [category, setCategory] = useState()
+    const [category_id, setCategoryID] = useState()
     const [date, setDate] = useState()
     const [type, setType] = useState("expense")
 
@@ -24,7 +24,7 @@ const TransactionForm = () => {
             return
         }
         
-        if (!category) {
+        if (!category_id) {
             alert("Please select a category")
             return
         }
@@ -44,7 +44,7 @@ const TransactionForm = () => {
             id: Date.now(),  // Generate unique ID
             amount: Number(amount),  // Convert string to number
             description,
-            category,
+            category_id: Number(category_id),
             date,
             type
         }
@@ -55,7 +55,7 @@ const TransactionForm = () => {
         // Clear form
         setAmount("")
         setDescription("")
-        setCategory("")
+        setCategoryID("")
         setDate("")
         setType("expense")
         
@@ -67,7 +67,7 @@ const TransactionForm = () => {
     }
 
     function onChangeCategory(e) {
-        setCategory(e.target.value);
+        setCategoryID(e.target.value);
     }
     function onChangeDate(e) {
         setDate(e.target.value);
@@ -100,12 +100,12 @@ const TransactionForm = () => {
             <label>enter category:    
                 Category:
                 <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    value={category_id}
+                    onChange={(e) => setCategoryID(e.target.value)}
                 >
                     <option value="">Select category</option>
                     {categories.map(cat => (
-                        <option key={cat.id} value={cat.name}>
+                        <option key={cat.id} value={cat.id}>
                             {cat.name}
                         </option>
                     ))}

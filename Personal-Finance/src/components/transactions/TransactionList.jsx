@@ -6,8 +6,12 @@ import { TransactionItem } from "./TransactionItem";
 
 const TransactionList = (props) => {
     const filtered_transactions = props.transactions;
-    const {deleteTransaction } = useFinance();
+    const {deleteTransaction, categories } = useFinance();
     
+    const cat_name = (cat_id) => {
+        const sele_cat = categories.find(cat => cat.id == cat_id);
+        return sele_cat?.name
+    }
     // const transactions_to_display = filtered_transactions ;
     if (filtered_transactions === null){
         return <p>No transactions yet. Add your first one!</p>
@@ -32,7 +36,7 @@ const TransactionList = (props) => {
                         {` ₹${transaction.amount}`}
                      </span>
                  </p>
-                 <p>Category: {transaction.category}</p>
+                 <p>Category: {cat_name(transaction.category_id)|| "Unknown"}</p>
                  <p>Date: {transaction.date}</p>
                  <button 
                      style={{ backgroundColor: 'crimson', color: 'white' }}
