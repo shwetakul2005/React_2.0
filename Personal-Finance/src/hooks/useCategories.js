@@ -2,11 +2,11 @@ import { useFinance } from "../context/FinanceContext";
 
 export default function useCategories () {
     const {transactions, categories} = useFinance();
-    
+    // let bl=0;
     const categoriesWithSpending = categories.map(category => {
 
         const categoryTransactions = transactions.filter(
-            t => t.category === category.id && t.type === 'expense'
+            t => t.category_id === category.id && t.type === 'expense'
         )
     
         const spent = categoryTransactions.reduce(
