@@ -7,6 +7,11 @@ import './Transactions.css'
 import { useState } from 'react';
 import { useFinance } from '../context/FinanceContext'; 
 // import { date } from '@mui/x-date-pickers-pro';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { DateRangePicker  } from 'react-date-range';
+import { addDays } from 'date-fns';
+
 
  
 const Transactions = (props) => {
@@ -14,15 +19,24 @@ const Transactions = (props) => {
    const {totalExpense, balance} = useTransactions();
    const [showForm, setShowForm] = useState(false);
    const {categories} = useFinance();
+   const [showCalender, setShowCalender] = useState(false);
    const [searchTerm, setSearchTerm] = useState("")
    const [selectedCategory, setSelectedCategory] = useState("")
    const [selectedType, setSelectedType] = useState("")
    
+   const [state, setState] = useState([{
+        startDate: new Date(),
+        endDate: addDays(new Date(), -30),
+        key: 'selection'
+    }]);
+   const effectiveDate = props.date || state;
    const effectiveSearch = props.searchTerm || searchTerm;
    const effectiveCategory = props.category || selectedCategory;
    const effectiveType = props.type || selectedType;
+   
 
    const filterResult = useTransactions({ 
+        date: effectiveDate,
         searchTerm: effectiveSearch, 
         category: effectiveCategory, 
         type: effectiveType 
@@ -40,14 +54,34 @@ const Transactions = (props) => {
         </div>
         <div className='controls-wrapper'>
             <div className='search-box'>
-
-            <input
-                type="text"
-                placeholder='Search transactions'
-                value={searchTerm}
-                onChange={(e) => {setSearchTerm(e.target.value)}}
-                /> 
-                {/* {console.log(searchTerm)} */}
+                <input
+                    type="text"
+                    placeholder='Search transactions'
+                    value={searchTerm}
+                    onChange={(e) => {setSearchTerm(e.target.value)}}
+                    /> 
+                    {/* {console.log(searchTerm)} */}
+            </div>
+            <div className='dateRangeSelector'>
+                <button 
+                    className="add-btn" 
+                    onClick={() => setShowCalender(!showCalender)}
+                    >
+                    {showCalender ? "" : "+ Select Date Range"}
+                </button>
+                {showCalender && (
+                    <div className="form-wrapper">
+                        <DateRangePicker
+                        onChange={item => setState([item.selection])}
+                        showSelectionPreview={true}
+                        moveRangeOnFirstSelection={false}
+                        months={1}
+                        ranges={state}
+                        direction="horizontal"
+                    />
+                    </div>
+                )}
+                
             </div>
 
             <div className='filter-box'>

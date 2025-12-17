@@ -2,14 +2,28 @@ import { useFinance } from "../context/FinanceContext";
 
 export default function useTransactions(filters = {}) {
     const {transactions} = useFinance()
-    const { searchTerm="", category = "", type = "" } = filters
+    const { date={}, searchTerm="", category = "", type = "" } = filters
 
-    // const {startDate, endDate} = date
-
+    
     let filtered = transactions
-    // if(date) {
-    //     filtered = filtered.filter(t => ((t.date >= endDate) && (t.date >= startDate) ))
-    // }
+    // const {startDate, endDate} = date[0]
+    // console.log("date here:")
+    // console.log(date[0]);
+
+    if (date && Array.isArray(date) && date[0]) {
+    
+        const { startDate, endDate } = date[0];
+
+        // Double check that startDate is not null before filtering
+        if (startDate && endDate) {
+            filtered = filtered.filter(t => {
+                const transactionDate = new Date(t.date);
+                return transactionDate >= new Date(startDate) && 
+                    transactionDate <= new Date(endDate);
+            });
+        }
+    }
+
     // console.log("search from usetransac:",searchTerm)
     if(searchTerm !== ""){
         filtered = filtered.filter(t => t.description.toLowerCase().includes(searchTerm.toLowerCase()))

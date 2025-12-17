@@ -376,3 +376,250 @@ html.dark .btn-filter.expense.active {
     text-align: center;
   }
 }
+
+/* =========================================
+   Wrapper Container
+   ========================================= */
+.dateRangeSelector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  
+  /* Make it look like a card */
+  background: var(--background-color);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--sidebar-border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  
+  /* Ensure it doesn't overflow on small screens */
+  overflow-x: auto; 
+}
+
+/* =========================================
+   Library Overrides (React-Date-Range)
+   ========================================= */
+
+/* 1. Main Backgrounds */
+.rdrCalendarWrapper, 
+.rdrDateRangeWrapper {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  border-radius: 8px;
+}
+
+/* 2. Top Display (Start Date - End Date) */
+.rdrDateDisplayWrapper {
+  background-color: transparent !important;
+}
+
+.rdrDateDisplayItem {
+  background-color: var(--sidebar-bg) !important; /* Greyish bg */
+  border: 1px solid var(--sidebar-border) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.rdrDateDisplayItem input {
+  color: var(--text-color) !important;
+  font-family: 'Inter', sans-serif !important; /* Match your font */
+  font-weight: 600;
+}
+
+.rdrDateDisplayItemActive {
+  border-color: var(--nav-title-color) !important; /* Highlight active input */
+}
+
+/* 3. Month & Year Controls */
+.rdrMonthAndYearWrapper {
+  padding-top: 10px !important;
+  height: 50px !important;
+}
+
+.rdrMonthAndYearPickers select {
+  color: var(--text-color) !important;
+  background: transparent !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600;
+}
+
+.rdrMonthAndYearPickers select:hover {
+  background-color: var(--sidebar-hover-bg) !important;
+}
+
+/* Navigation Arrows */
+.rdrNextPrevButton {
+  background-color: var(--sidebar-bg) !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50% !important;
+}
+
+.rdrNextPrevButton:hover {
+  background-color: var(--nav-title-color) !important;
+}
+
+.rdrNextPrevButton:hover i {
+  border-color: #fff !important; /* Arrow turns white on hover */
+}
+
+/* 4. The Calendar Grid (Days) */
+.rdrMonth {
+  padding: 0 1rem 1rem 1rem !important;
+}
+
+.rdrWeekDay {
+  color: var(--sidebar-text) !important; /* Muted text for Mon/Tue/Wed */
+  font-weight: 600 !important;
+}
+
+/* Day Numbers */
+.rdrDayNumber span {
+  color: var(--text-color) !important;
+  font-weight: 500 !important;
+}
+
+/* Passive Days (Next/Prev month) */
+.rdrDayPassive .rdrDayNumber span {
+  color: var(--sidebar-text) !important;
+  opacity: 0.5;
+}
+
+/* 5. The Selection Color (The Magic Part) */
+
+/* The solid start and end circles */
+.rdrStartEdge, 
+.rdrEndEdge {
+  background: var(--nav-title-color) !important; /* Uses your Theme Blue/Green */
+}
+
+/* The faint color in between the range */
+.rdrInRange {
+  background: var(--nav-title-color) !important;
+  opacity: 0.1 !important; /* Make it very faint so numbers are readable */
+  color: var(--nav-title-color) !important;
+}
+
+/* Text color when selected */
+.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span, 
+.rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span, 
+.rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span {
+  color: var(--text-color) !important; /* Keep text readable */
+}
+
+/* Fix for white text on the solid edges */
+.rdrSelected, 
+.rdrStartEdge, 
+.rdrEndEdge {
+  color: #fff !important; /* Force white text on the blue/green bubbles */
+}
+.rdrStartEdge .rdrDayNumber span, 
+.rdrEndEdge .rdrDayNumber span {
+    color: #fff !important;
+}
+
+/* =========================================
+   DARK MODE SPECIFICS
+   ========================================= */
+html.dark .rdrDateDisplayItem {
+  background-color: #000 !important; /* Darker input box */
+}
+
+html.dark .rdrNextPrevButton i {
+  border-color: #fff !important; /* White arrows by default in dark mode */
+}
+
+/* In Dark mode, the "In Range" color needs to be brighter/more visible */
+html.dark .rdrInRange {
+  opacity: 0.2 !important; 
+}
+/* =========================================
+   1. Container Constraints
+   ========================================= */
+.dateRangeSelector {
+  display: flex;
+  justify-content: center; /* Center it */
+  margin-bottom: 2rem;
+  
+  /* Remove any forced padding that might expand it */
+  padding: 0; 
+  background: transparent; /* Let the inner wrapper handle bg */
+  box-shadow: none;        /* Let the inner wrapper handle shadow */
+  border: none;
+}
+
+/* =========================================
+   2. Compact Overrides (The Fix)
+   ========================================= */
+
+/* Shrink the main font size - this cascades to em-based sizes */
+.rdrCalendarWrapper {
+  font-size: 12px !important; /* Default is often 16px, this shrinks everything */
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2) !important; /* Add shadow here instead */
+  overflow: hidden; /* clean corners */
+}
+
+/* Shrink the Sidebar (Today, Yesterday, etc.) */
+.rdrDefinedRangesWrapper {
+  width: 120px !important; /* Make sidebar narrower */
+  font-size: 11px !important;
+  border-right: 1px solid var(--sidebar-border) !important;
+}
+
+.rdrStaticRange {
+    border-bottom: 1px solid var(--sidebar-border) !important;
+    padding: 0 10px !important;
+}
+
+.rdrStaticRangeLabel {
+    padding: 8px 10px !important; /* Less padding = shorter list */
+}
+
+/* Shrink the Month View Width */
+.rdrMonth {
+  width: 260px !important; /* Force the calendar to be narrower */
+  padding: 0 0.5rem 0.5rem 0.5rem !important;
+}
+
+/* Make the Day Cells Smaller */
+.rdrDay {
+  height: 32px !important; /* Default is usually ~45px */
+  line-height: 32px !important;
+}
+
+.rdrDayNumber span {
+    font-size: 0.9rem !important; /* Smaller numbers */
+}
+
+/* Adjust the Top Input Area (Start Date - End Date) */
+.rdrDateDisplayWrapper {
+    margin: 0.5rem !important;
+}
+
+.rdrDateDisplayItem {
+    padding: 0.2rem 0.5rem !important; /* Tighter inputs */
+}
+
+.rdrDateDisplayItem input {
+    font-size: 0.9rem !important;
+}
+
+/* =========================================
+   3. Dark Mode Fixes (Ensure visibility)
+   ========================================= */
+html.dark .rdrDefinedRangesWrapper {
+    background-color: #252525 !important; /* Slightly lighter than pure black */
+    border-right-color: #3E3F3E !important;
+}
+
+html.dark .rdrStaticRange:hover,
+html.dark .rdrStaticRange.rdrStaticRangeSelected {
+    background-color: var(--nav-title-color) !important; /* Green highlight */
+    color: #000 !important;
+}
+
+html.dark .rdrStaticRange {
+    background-color: transparent !important;
+    color: var(--sidebar-text) !important;
+}
