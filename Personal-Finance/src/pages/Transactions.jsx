@@ -10,7 +10,7 @@ import { useFinance } from '../context/FinanceContext';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker  } from 'react-date-range';
-import { addDays } from 'date-fns';
+import { addDays, startOfMonth } from 'date-fns';
 
 
  
@@ -25,8 +25,8 @@ const Transactions = (props) => {
    const [selectedType, setSelectedType] = useState("")
    
    const [state, setState] = useState([{
-        startDate: new Date(),
-        endDate: addDays(new Date(), -30),
+        startDate: startOfMonth(new Date()),
+        endDate: new Date(),
         key: 'selection'
     }]);
    const effectiveDate = props.date || state;
@@ -73,11 +73,12 @@ const Transactions = (props) => {
                     <div className="form-wrapper">
                         <DateRangePicker
                         onChange={item => setState([item.selection])}
-                        showSelectionPreview={true}
-                        moveRangeOnFirstSelection={false}
-                        months={1}
                         ranges={state}
+                        showSelectionPreview={true}
+                        moveRangeOnFirstSelection={true}
+                        months={1}
                         direction="horizontal"
+                        showMonthAndYearPickers={true}
                     />
                     </div>
                 )}
