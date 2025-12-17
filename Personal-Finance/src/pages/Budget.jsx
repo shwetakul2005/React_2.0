@@ -3,25 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import useCategories from '../hooks/useCategories';
 import { useFinance } from '../context/FinanceContext';
 import './Budget.css'
+import BudgetList from '../components/budget/BudgetList';
  
 const Budget = () => {
    const navigate = useNavigate();
-   const {totalSpent} = useCategories();
+   const {totalSpent, categoriesOverBudget} = useCategories();
    const {categories} = useFinance();
    const totalBudget = categories.reduce((sum, category) => sum + category.budgetLimit, 0);
-   
-   // Inside your Component (e.g., Budget.js or Dashboard.js)
 
-   // 1. Calculate the percentage (Guard against dividing by zero)
+   // 1. Calculate the percentage
    const percentUsed = totalBudget > 0 
       ? Math.min(100, Math.round((totalSpent / totalBudget) * 100)) 
       : 0;
 
    // 2. Determine Color Status based on your rules
    let statusClass = "status-safe"; // Default Green (< 70%)
-   if (percentUsed > 90) {
+   if (percentUsed >= 90) {
       statusClass = "status-danger"; // Red (> 90%)
-   } else if (percentUsed > 70) {
+   } else if (percentUsed >= 70) {
       statusClass = "status-warning"; // Orange (70-90%)
    }
 
@@ -30,9 +29,9 @@ const Budget = () => {
    const remainingClass = remaining < 0 ? "status-danger" : "status-safe";
 
 return (
-    <div className="budget-summary-wrapper">
+   <div className="budget-summary-wrapper">
         
-        {/* --- The Three Cards --- */}
+        {/*  The Three Cards  */}
         <div className='header-summary-sec'>
             
             {/* Total Budget (Neutral) */}
@@ -54,7 +53,7 @@ return (
             </div>
         </div>
 
-        {/* --- Progress Bar Section --- */}
+        {/*  Progress Bar Section  */}
         <div className="progress-section">
             <div className="progress-labels">
                 <span>Overall Budget Progress</span>
@@ -68,8 +67,12 @@ return (
                 ></div>
             </div>
         </div>
-
-    </div>
+        <div className='main-content'>
+            <div className='category-wise-bl'>
+                <BudgetList />
+            </div>
+        </div>
+   </div>
 );
 };
  

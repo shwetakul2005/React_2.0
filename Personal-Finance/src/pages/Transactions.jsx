@@ -9,29 +9,34 @@ import { useFinance } from '../context/FinanceContext';
 // import { date } from '@mui/x-date-pickers-pro';
 
  
-const Transactions = () => {
+const Transactions = (props) => {
    const navigate = useNavigate();
    const {totalExpense, balance} = useTransactions();
    const [showForm, setShowForm] = useState(false);
    const {categories} = useFinance();
-   
-   // searching/filtering functionality
    const [searchTerm, setSearchTerm] = useState("")
    const [selectedCategory, setSelectedCategory] = useState("")
    const [selectedType, setSelectedType] = useState("")
+   
+   const effectiveSearch = props.searchTerm || searchTerm;
+   const effectiveCategory = props.category || selectedCategory;
+   const effectiveType = props.type || selectedType;
+
    const filterResult = useTransactions({ 
-        searchTerm, 
-        category: selectedCategory, 
-        type: selectedType 
-    })
+        searchTerm: effectiveSearch, 
+        category: effectiveCategory, 
+        type: effectiveType 
+    });
+
+    const formatMoney = (amount) => `₹${Number(amount).toLocaleString()}`;
 
    return (
     <>
         {/* <DateRangePicker /> */}
         <h1 className="transactions-header">Transactions here</h1>  
         <div className="balance-stats">
-            <h2>Your current Balance is: ₹{balance}</h2>
-            <h2>Your Total Expense is ₹{totalExpense}</h2>
+            <h2>Your current Balance is: {formatMoney(balance)}</h2>
+            <h2>Your Total Expense is: {formatMoney(totalExpense)}</h2>
         </div>
         <div className='controls-wrapper'>
             <div className='search-box'>

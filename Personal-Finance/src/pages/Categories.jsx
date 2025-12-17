@@ -8,6 +8,9 @@ const Categories = () => {
    const {categories, addCategories, updateCategory, deleteCategory} = useFinance();
    const [editcategory, setEditCategory] = useState(null);
    const [showForm, setShowForm] = useState(false);
+   const formatMoney = (amount) => {
+      if(amount === 0) return "NaN";
+      return `₹${Number(amount).toLocaleString()}`};
 
    const handleEdit = (id) => {
       // if(showForm===true) {
@@ -25,13 +28,8 @@ const Categories = () => {
    
     return (
       <div className='page_content'>
-        <h1>Categories here</h1>  
-         <button 
-            className="add-btn" 
-            onClick={() => setShowForm(!showForm)}
-         >
-            {showForm ? "Cancel Transaction" : "+ Add New Category"}
-         </button>
+        <h1>All Categories</h1>  
+         
 
         {/* <h3>Categories: </h3> */}
         
@@ -50,7 +48,7 @@ const Categories = () => {
               {/* Category Name and Budget */}
               <div className='category-details'>
                 <h4>{category.name}</h4> {/* Category Name */}
-                <p>{category.budgetLimit}</p> {/* Budget Limit */}
+                <p>{formatMoney(category.budgetLimit)}</p> {/* Budget Limit */}
               </div>
               
               {/* Buttons */}
@@ -83,7 +81,12 @@ const Categories = () => {
                <CategoryForm categoryToEdit={categoryToEdit} clearEdit={clearEdit}/>
             </div>
          )}
-       
+      <button 
+            className="add-btn" 
+            onClick={() => setShowForm(!showForm)}
+         >
+            {showForm ? "Cancel Transaction" : "+ Add New Category"}
+      </button> 
       </div>
     );
 };

@@ -6,7 +6,7 @@ export default function useCategories () {
     const categoriesWithSpending = categories.map(category => {
 
         const categoryTransactions = transactions.filter(
-            t => t.category_id === category.id && t.type === 'expense'
+            t => t.category_id === category.id && t.type === 'expense' && category.budgetLimit > 0
         )
     
         const spent = categoryTransactions.reduce(
@@ -20,7 +20,7 @@ export default function useCategories () {
             ...category,
             spent,
             remaining,
-            percentUsed: (spent / category.budgetLimit) * 100
+            percentUsed: ((spent / category.budgetLimit) * 100)
         }
     })
 

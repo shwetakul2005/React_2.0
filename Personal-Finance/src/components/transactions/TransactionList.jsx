@@ -17,6 +17,8 @@ const TransactionList = (props) => {
         return <p>No transactions yet. Add your first one!</p>
     }
 
+    const formatMoney = (amount) => `₹${Number(amount).toLocaleString()}`;
+
     return (
         <>
         {filtered_transactions.map((transaction) => (
@@ -33,7 +35,7 @@ const TransactionList = (props) => {
                          color: transaction.type === 'income' ? 'green' : 'red', 
                          fontWeight: 'bold' 
                      }}>
-                        {` ₹${transaction.amount}`}
+                        {` ${formatMoney(transaction.amount)}`}
                      </span>
                  </p>
                  <p>Category: {cat_name(transaction.category_id)|| "Unknown"}</p>

@@ -12,10 +12,14 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         // Validation
-        if (!budgetLimit || budgetLimit <= 0) {
+        if (budgetLimit < 0) {
             alert("Please enter a valid budgetLimit")
             return
         }
+        // if (!budgetLimit || budgetLimit <= 0) {
+        //     alert("Please enter a valid budgetLimit")
+        //     return
+        // }
         
         if (!name) {
             alert("Please enter a name")
