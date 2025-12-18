@@ -65,7 +65,7 @@ const BudgetList = () => {
     if (!categories || categories.length === 0) {
         return <div className="no-data">No budgets set yet.</div>;
     }
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     // const handleNavigationClick = () => {
     //     // const filterResult = useTransactions({  

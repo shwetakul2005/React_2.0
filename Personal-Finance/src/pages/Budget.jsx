@@ -4,16 +4,43 @@ import useCategories from '../hooks/useCategories';
 import { useFinance } from '../context/FinanceContext';
 import './Budget.css'
 import BudgetList from '../components/budget/BudgetList';
+import { DefinedRange } from 'react-date-range';
+import { useState } from 'react';
+import useTransactions from '../hooks/useTransactions';
+import { startOfMonth } from 'date-fns';
  
 const Budget = () => {
    const navigate = useNavigate();
    const {totalSpent, categoriesOverBudget} = useCategories();
    const {categories} = useFinance();
-   const totalBudget = categories.reduce((sum, category) => sum + category.budgetLimit, 0);
+   const [state, setState] = useState([
+    {
+        startDate: startOfMonth(new Date()),
+        endDate: new Date(),
+        key: 'selection'
+    }
+    ]);
+   const { 
+        transactions: filteredTransactions,  // The filtered array
+        totalExpense,                        // Already calculated by hook
+        totalIncome,
+        balance 
+        } = useTransactions({date:state})
+   
+    const categoriesWithTransactions = [...new Set(
+        filteredTransactions.map(t => t.category)
+    )]
+
+    // Sum budgets only for those categories
+    const totalBudget = categories
+    .filter(cat => categoriesWithTransactions.includes(cat.id))
+    .reduce((sum, cat) => sum + (cat.budgetLimit || 0), 0)
+    
+
 
    // 1. Calculate the percentage
    const percentUsed = totalBudget > 0 
-      ? Math.min(100, Math.round((totalSpent / totalBudget) * 100)) 
+      ? Math.min(100, Math.round((totalExpense / totalBudget) * 100)) 
       : 0;
 
    // 2. Determine Color Status based on your rules
@@ -31,9 +58,14 @@ const Budget = () => {
 return (
    <div className="budget-summary-wrapper">
         
+            <div>
+                <DefinedRange
+                    onChange={item => setState([item.selection])}
+                    ranges={state}
+                />
+            </div>
         {/*  The Three Cards  */}
         <div className='header-summary-sec'>
-            
             {/* Total Budget (Neutral) */}
             <div className='summary-card neutral'>
                 <span className="stat-label">Total Budget</span>
