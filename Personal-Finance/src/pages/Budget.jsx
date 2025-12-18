@@ -7,19 +7,21 @@ import BudgetList from '../components/budget/BudgetList';
 import { DefinedRange } from 'react-date-range';
 import { useState } from 'react';
 import useTransactions from '../hooks/useTransactions';
-import { startOfMonth } from 'date-fns';
+import { startOfMonth, format } from 'date-fns';
+
  
 const Budget = () => {
    const navigate = useNavigate();
    const {totalSpent, categoriesOverBudget} = useCategories();
    const {categories} = useFinance();
    const [state, setState] = useState([
-    {
-        startDate: startOfMonth(new Date()),
-        endDate: new Date(),
-        key: 'selection'
-    }
+       {
+           startDate: startOfMonth(new Date()),
+           endDate: new Date(),
+           key: 'selection'
+        }
     ]);
+    const { startDate, endDate } = state[0];
    const { 
         transactions: filteredTransactions,  // The filtered array
         totalExpense,                        // Already calculated by hook
@@ -27,19 +29,16 @@ const Budget = () => {
         balance 
         } = useTransactions({date:state})
    
-    const categoriesWithTransactions = [...new Set(
-        filteredTransactions.map(t => t.category)
-    )]
 
-    // Sum budgets only for those categories
-    const totalBudget = categories
-    .filter(cat => categoriesWithTransactions.includes(cat.id))
-    .reduce((sum, cat) => sum + (cat.budgetLimit || 0), 0)
-    
-
+    // Sum budgets for ALL categories, regardless of transactions
+    const totalBudget = categories.reduce((sum, cat) => {
+        return sum + (cat.budgetLimit || 0)
+    }, 0)
 
    // 1. Calculate the percentage
-   const percentUsed = totalBudget > 0 
+   console.log("e", totalExpense)
+   console.log("s", totalSpent)
+   const percentUsed = totalBudget >= 0 
       ? Math.min(100, Math.round((totalExpense / totalBudget) * 100)) 
       : 0;
 
@@ -52,20 +51,23 @@ const Budget = () => {
    }
 
    // 3. Determine Remaining Balance Status
-   const remaining = totalBudget - totalSpent;
+   const remaining = totalBudget - totalExpense;
    const remainingClass = remaining < 0 ? "status-danger" : "status-safe";
 
 return (
    <div className="budget-summary-wrapper">
-        
-            <div>
+
+        <div className='header-summary-sec'>
+            <div className="date-card">
                 <DefinedRange
-                    onChange={item => setState([item.selection])}
+                    onChange={item => {
+                        const dateName = item;
+                        setState([item.selection])
+                    }}
                     ranges={state}
+                    showSelectionPreview={true}
                 />
             </div>
-        {/*  The Three Cards  */}
-        <div className='header-summary-sec'>
             {/* Total Budget (Neutral) */}
             <div className='summary-card neutral'>
                 <span className="stat-label">Total Budget</span>
@@ -74,13 +76,14 @@ return (
 
             {/* Total Spent (Dynamic Color) */}
             <div className={`summary-card ${statusClass}`}>
-                <span className="stat-label">Total Spent</span>
-                <span className="stat-value">₹{totalSpent}</span>
+                <span className="stat-label">{`Total Spent from ${format(startDate, 'MMM d')} to ${format(endDate, 'MMM d, yyyy')}`}</span>
+                {/* {console.log(`total spent in box: ${totalSpent}`)} */}
+                <span className="stat-value">₹{totalExpense}</span>
             </div>
 
             {/* Remaining (Green/Red) */}
             <div className={`summary-card ${remainingClass}`}>
-                <span className="stat-label">Remaining</span>
+                <span className="stat-label">Current Remaining Budget</span>
                 <span className="stat-value">₹{remaining}</span>
             </div>
         </div>
@@ -100,8 +103,26 @@ return (
             </div>
         </div>
         <div className='main-content'>
+            <h2>{`Category wise budget status from ${format(startDate, 'MMM d')} to ${format(endDate, 'MMM d, yyyy')}`}</h2>
+            <div></div>
+           
             <div className='category-wise-bl'>
-                <BudgetList />
+                <div>
+                    <h2>Fixed Category List:</h2>
+                    <BudgetList 
+                    startDate={startDate}  
+                    endDate={endDate} 
+                    type={"fixed"}      
+                    />
+                </div>
+                <div>
+                    <h2>Variable Category List</h2>
+                    <BudgetList 
+                    startDate={startDate}  
+                    endDate={endDate} 
+                    type={"variable"}      
+                    />
+                </div>
             </div>
         </div>
    </div>

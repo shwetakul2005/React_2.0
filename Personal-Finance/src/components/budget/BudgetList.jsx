@@ -49,15 +49,17 @@
 
 // export default BudgetList;
 
-import React from "react";
+import React, { useState } from "react";
 import useCategories from "../../hooks/useCategories";
 import './BudgetList.css'
 import { useNavigate } from "react-router-dom";
 import useTransactions from "../../hooks/useTransactions";
 import Transactions from "../../pages/Transactions";
 
-const BudgetList = () => {
-    const { categories } = useCategories();
+const BudgetList = ({ startDate, endDate, type }) => {
+    const { categories } = useCategories({startDate, endDate, type});
+    const isFixed = type === "fixed";
+    
 
     // Helper to format currency (Optional, makes it look cleaner)
     const formatMoney = (amount) => `₹${Number(amount).toLocaleString()}`;
@@ -65,22 +67,14 @@ const BudgetList = () => {
     if (!categories || categories.length === 0) {
         return <div className="no-data">No budgets set yet.</div>;
     }
-    // const navigate = useNavigate();
-
-    // const handleNavigationClick = () => {
-    //     // const filterResult = useTransactions({  
-    //     //     category: cat, 
-    //     // })
-    //     // Transactions(filterResult);
-    //     navigate('/transactions');
-
-    // }
 
     return (
         <div className="budget-list-grid">
-            {categories.map((cat) =>{
-
+            {categories.map((cat) =>{                
                 if(cat.budgetLimit <=0 ) {
+                    return ;
+                }
+                if(cat.type !== type) {
                     return ;
                 }
                 
@@ -120,26 +114,41 @@ const BudgetList = () => {
 
                         {/* Remaining */}
                         <div className="budget-meta">
-                            <span className={cat.remaining < 0 ? "text-danger" : "text-muted"}>
-                                {cat.remaining < 0 ? "Overspent by: " : "Remaining: "}
-                                {formatMoney(Math.abs(cat.remaining))}
-                            </span>
+                            {/* conditional rendering */}
+                            {!isFixed && (
+                                <span className={cat.remaining < 0 ? "text-danger" : "text-muted"}>
+                                    {cat.remaining < 0 ? "Overspent by: " : "Remaining: "}
+                                    {formatMoney(Math.abs(cat.remaining))}
+                                </span>
+                            )}
+                            {isFixed && (cat.remaining===cat.budgetLimit)&&(
+                                <span>
+                                <div>Not Paid</div>
+                                <div>Due Date: {cat.dueDate}</div>     
+                                </span>
+                            )}
+                            {isFixed && (cat.remaining===0)&&(
+                                <span>Paid</span>     
+                            )}
                         </div>
 
                         {/* Progress Bar (Reusing your existing classes) */}
-                        <div className="progress-section compact">
-                            <div className="progress-labels">
-                                <span>Progress</span>
-                                <span className={statusClass}>{pct}%</span>
+                        {!isFixed && (
+                            <div className="progress-section compact">
+                                <div className="progress-labels">
+                                    <span>Progress</span>
+                                    <span className={statusClass}>{pct}%</span>
+                                </div>
+                                
+                                <div className="progress-track">
+                                    <div 
+                                        className={`progress-fill ${statusClass}`} 
+                                        style={{ width: `${Math.min(pct, 100)}%` }}
+                                    ></div>
+                                </div>
                             </div>
-                            
-                            <div className="progress-track">
-                                <div 
-                                    className={`progress-fill ${statusClass}`} 
-                                    style={{ width: `${Math.min(pct, 100)}%` }}
-                                ></div>
-                            </div>
-                        </div>
+
+                        )}
 
                     </div>
                 );

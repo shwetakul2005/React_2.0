@@ -197,7 +197,7 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
 
 
             <div></div>
-            <label>Is the expense recurring?   
+            <label>Is it recurring?   
                 
                 <select
                     value={isRecurring}

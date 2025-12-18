@@ -1,11 +1,21 @@
 import { useFinance } from "../context/FinanceContext";
 
-export default function useCategories () {
+export default function useCategories (filters = {}) {
     const {transactions, categories} = useFinance();
+    const { startDate = null, endDate = null } = filters
+
+    let filteredTransactions = transactions
+    
+    if (startDate && endDate) {
+        filteredTransactions = transactions.filter(t => {
+            const transactionDate = new Date(t.date)
+            return transactionDate >= startDate && transactionDate <= endDate
+        })
+    }
 
     const categoriesWithSpending = categories.map(category => {
 
-        const categoryTransactions = transactions.filter(
+        const categoryTransactions = filteredTransactions.filter(
             t => t.category_id === category.id && t.type === 'expense' && category.budgetLimit > 0
         )
     
