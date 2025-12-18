@@ -8,12 +8,12 @@ const FinanceContext = createContext()
 function FinanceContextProvider({children}){
     const [transactions, setTransactions] = useState([
         // {id: 1, amount:6000, category_id:1, date:"2025-11-13", description: "twitter checkout", type: "income"},
-        // {id: 2, amount:300, category:1, date:"2025-11-15", description: "burger", type: "expense"}
+        // {id: 2, amount:300, category:1, date:"2025-11-15", description: "burger", type: "expense", isFixedExpense:true}
     ])
     const [categories, setCategories] = useState([
-        { id: 1, name: 'Food', color: '#ff6b6b', budgetLimit: 500},
-        { id: 2, name: 'Transport', color: '#4ecdc4', budgetLimit: 1500 },
-        { id: 3, name: 'Entertainment', color: '#45b7d1', budgetLimit: 2500 }
+        { id: 1, name: 'Food', color: '#ff6b6b', budgetLimit: 500, type: "variable", isRecurring: true},
+        { id: 2, name: 'Transport', color: '#4ecdc4', budgetLimit: 1500, type: "variable", isRecurring: true },
+        { id: 3, name: 'Entertainment', color: '#45b7d1', budgetLimit: 2500, type: "variable", isRecurring: false }
     ])
 
     const addTransaction = (transaction) => {

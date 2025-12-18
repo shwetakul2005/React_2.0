@@ -2,7 +2,7 @@ import { useFinance } from "../context/FinanceContext";
 
 export default function useCategories () {
     const {transactions, categories} = useFinance();
-    // let bl=0;
+
     const categoriesWithSpending = categories.map(category => {
 
         const categoryTransactions = transactions.filter(

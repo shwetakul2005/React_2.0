@@ -6,6 +6,9 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
     const [budgetLimit, setBudgetLimit] = useState("")
     const [name, setName] = useState("")
     const [color, setColor] = useState()
+    const [type, setType] = useState("variable")
+    const [dueDate, setDueDate] = useState()
+    const [isRecurring, setIsRecurring] = useState(false)
 
     const {addCategory, updateCategory} = useFinance();
 
@@ -30,13 +33,22 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
             alert("Please select a color")
             return
         }
+
+        if(type === "fixed" && !dueDate) {
+            alert("Please enter dueDate for Fixed Expense")
+            return
+        }
+
                 
         // Create transaction object
         const newCategory = {
             id: Date.now(),  // Generate unique ID
             budgetLimit: Number(budgetLimit),  // Convert string to number
             name,
-            color
+            color,
+            type,
+            dueDate,
+            isRecurring
         }
         
         // Add to context
@@ -45,7 +57,10 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
                 id: (categoryToEdit.id),
                 budgetLimit: Number(budgetLimit),  // Convert string to number
                 name,
-                color
+                color,
+                type,
+                dueDate,
+                isRecurring
             }
             updateCategory(categoryToEdit.id, selectedCategory);
             if (clearEdit) {
@@ -56,6 +71,9 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
             setBudgetLimit("")
             setName("")
             setColor("")
+            setType("variable")
+            setDueDate("")
+            setIsRecurring(false)
             
             alert("Category updated successfully!")
         }
@@ -65,6 +83,9 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
             setBudgetLimit("")
             setName("")
             setColor("")
+            setType("variable")
+            setDueDate("")
+            setIsRecurring(false)
             
             alert("Category added successfully!")
         }
@@ -91,6 +112,9 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
         setName(categoryToEdit.name);
         setColor(categoryToEdit.color);
         setBudgetLimit(categoryToEdit.budgetLimit);
+        setType(categoryToEdit.type);
+        setDueDate(categoryToEdit.dueDate);
+        setIsRecurring(categoryToEdit.isRecurring);
       }
    }, [categoryToEdit])
 
@@ -103,6 +127,15 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
     }
     function onChangeColor(e) {
         setColor(e.target.value);
+    }
+    function onChangeType(e){
+        setType(e.target.value);
+    }
+    function onChangeDueDate(e){
+        setDueDate(e.target.value);
+    }
+    function onChangeIsRecurring(e){
+        setIsRecurring(e.target.value);
     }
 
     return(
@@ -140,8 +173,41 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
                     <option value="yellow">yellow</option>
                 </select>
             </label>
+            <div></div>
+            <label>enter type:    
+                Type:
+                <select
+                    value={type}
+                    onChange={onChangeType}
+                    style={{ padding: '5px', borderRadius: '5px' }} // Style the main select box instead
+                >
+                    <option value="variable">Variable</option>
+                    <option value="fixed">Fixed</option>
+                </select>
+            </label>
            
             <div></div>
+             <label>enter Due Date:
+                <input
+                    type="date"
+                    value={dueDate}
+                    onChange={(e) => setDueDate(e.target.value)}
+                />
+            </label>
+
+
+            <div></div>
+            <label>Is the expense recurring?   
+                
+                <select
+                    value={isRecurring}
+                    onChange={onChangeIsRecurring}
+                    style={{ padding: '5px', borderRadius: '5px' }} // Style the main select box instead
+                >
+                    <option value={false}>No</option>
+                    <option value={true}>Yes</option>
+                </select>
+            </label>
         
         <button type="submit">
             {(categoryToEdit === null) ? "Add Category" : "Update Category" }
