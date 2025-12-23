@@ -30,38 +30,26 @@ PocketPal is a React-based personal finance and budgeting web application design
 
 ## Project Structure
 
+```
+
 Personal-Finance/
-
 ├── components/
-
 │ ├── budget/
-
 │ ├── categories/
-
 │ ├── transactions/
-
 │ ├── dashboard/
-
 │ ├── insights/
-
 │ ├── layout/
-
 │ └── common/
-
 ├── context/
-
 ├── hooks/
-
 ├── pages/
-
 ├── utils/
-
 ├── App.jsx
-
 ├── main.jsx
-
 └── index.css
 
+```
 ---
 
 ## Custom Hooks
