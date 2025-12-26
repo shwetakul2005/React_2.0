@@ -36,6 +36,14 @@
   /* object-fit: cover;    ensures proper cropping */
   /* border-radius: 50%; */
 }
+.pp{
+  
+  height: 40px;
+  width: auto;
+  /* object-fit: cover;    ensures proper cropping */
+  border-radius: 40%;
+
+}
 
 .nav-title {
   color: var(--nav-title-color);

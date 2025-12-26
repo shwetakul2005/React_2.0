@@ -1,5 +1,6 @@
 // component/NavBar.js
 import PocketPalLogo from "../../assets/PocketPalLogo2.1.png";
+import pp from "../../assets/pp.jpeg";
 import './Navbar.css'
 import { useState } from 'react'
 import ThemeBtn from "./ThemeBtn";
@@ -21,11 +22,12 @@ const NavBar = () => {
     </li>
 
     <li className="nav-center">
-      <input type="text" placeholder="Search.."></input>
+      {/* <input type="text" placeholder="Search.."></input> */}
+      <div><h1>Hi Shweta, Welcome back!</h1></div>
     </li>
 
     <li className="nav-right">
-      <span>ProfilePic</span>
+      <img src={pp} className="pp" alt="logo" />
       {/* <button className="theme-btn" onClick={themeToggle}>Theme</button> */}
       <ThemeBtn />
     </li>

@@ -5,7 +5,7 @@ import { createContext } from 'react'
 // these are the global values and functions we want various 
 // components to access without prop drilling
 export const ThemeContext = createContext({
-    themeMode: "light",
+    themeMode: "dark",
     darkTheme: () => {},
     lightTheme: () => {},
 })

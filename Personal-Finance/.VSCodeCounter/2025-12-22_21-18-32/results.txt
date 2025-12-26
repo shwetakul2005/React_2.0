@@ -1,0 +1,88 @@
+Date : 2025-12-22 21:18:32
+Directory : c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src
+Total : 49 files,  2307 codes, 597 comments, 500 blanks, all 3404 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JavaScript JSX |         31 |      1,118 |        191 |        225 |      1,534 |
+| PostCSS        |         12 |      1,113 |        400 |        249 |      1,762 |
+| JavaScript     |          6 |         76 |          6 |         26 |        108 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                           | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                              |         49 |      2,307 |        597 |        500 |      3,404 |
+| . (Files)                                                                                                      |          4 |         42 |        110 |         13 |        165 |
+| components                                                                                                     |         27 |        958 |        191 |        210 |      1,359 |
+| components\budget                                                                                              |          3 |        158 |         71 |         41 |        270 |
+| components\categories                                                                                          |          3 |        244 |         44 |         47 |        335 |
+| components\common                                                                                              |          4 |          0 |          0 |          4 |          4 |
+| components\dashboard                                                                                           |          3 |          0 |          0 |          3 |          3 |
+| components\insights                                                                                            |          2 |          0 |          0 |          2 |          2 |
+| components\layout                                                                                              |          7 |        316 |         57 |         71 |        444 |
+| components\transactions                                                                                        |          5 |        240 |         19 |         42 |        301 |
+| context                                                                                                        |          2 |        111 |         40 |         31 |        182 |
+| hooks                                                                                                          |          3 |         76 |          6 |         23 |        105 |
+| pages                                                                                                          |         10 |      1,120 |        250 |        220 |      1,590 |
+| utils                                                                                                          |          3 |          0 |          0 |          3 |          3 |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                       | language       | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\App.css                                        | PostCSS        |          0 |         42 |          1 |         43 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\App.jsx                                        | JavaScript JSX |         30 |          0 |          9 |         39 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\budget\BudgetAlerts.jsx             | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\budget\BudgetList.css               | PostCSS        |         74 |         20 |         15 |        109 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\budget\BudgetList.jsx               | JavaScript JSX |         84 |         51 |         25 |        160 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\categories\CategoryForm.css         | PostCSS        |         70 |         25 |         19 |        114 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\categories\CategoryForm.jsx         | JavaScript JSX |        174 |         19 |         27 |        220 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\categories\CategoryList.jsx         | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\common\Button.jsx                   | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\common\Card.jsx                     | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\common\Input.jsx                    | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\common\Modal.jsx                    | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\dashboard\RecentTransactions.jsx    | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\dashboard\SpendingChart.jsx         | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\dashboard\SummaryCard.jsx           | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\insights\ChatInterface.jsx          | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\insights\InsightCard.jsx            | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\Layout.css                   | PostCSS        |         81 |         11 |         18 |        110 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\Layout.jsx                   | JavaScript JSX |         32 |          7 |          8 |         47 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\Navbar.css                   | PostCSS        |         65 |         11 |         15 |         91 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\Navbar.jsx                   | JavaScript JSX |         26 |          2 |         12 |         40 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\SideBar.css                  | PostCSS        |         56 |          9 |          9 |         74 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\Sidebar.jsx                  | JavaScript JSX |         38 |          9 |          3 |         50 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\ThemeBtn.jsx                 | JavaScript JSX |         18 |          8 |          6 |         32 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\transactions\TransactionFilters.jsx | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\transactions\TransactionForm.css    | PostCSS        |         59 |         10 |         13 |         82 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\transactions\TransactionForm.jsx    | JavaScript JSX |        120 |          4 |         16 |        140 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\transactions\TransactionItem.jsx    | JavaScript JSX |          9 |          0 |          3 |         12 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\transactions\TransactionList.jsx    | JavaScript JSX |         52 |          5 |          9 |         66 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\context\FinanceContext.jsx                     | JavaScript JSX |        100 |         37 |         27 |        164 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\context\ThemeContext.jsx                       | JavaScript JSX |         11 |          3 |          4 |         18 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\hooks\useCategories.js                         | JavaScript     |         39 |          0 |         11 |         50 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\hooks\useLocalStorage.js                       | JavaScript     |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\hooks\useTransactions.js                       | JavaScript     |         37 |          6 |         11 |         54 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\index.css                                      | PostCSS        |          0 |         68 |          1 |         69 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\main.jsx                                       | JavaScript JSX |         12 |          0 |          2 |         14 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Budget.css                               | PostCSS        |        173 |         58 |         37 |        268 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Budget.jsx                               | JavaScript JSX |        107 |         10 |         15 |        132 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Categories.css                           | PostCSS        |         65 |         15 |         12 |         92 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Categories.jsx                           | JavaScript JSX |         67 |         15 |         12 |         94 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Dashboard.css                            | PostCSS        |         54 |         20 |         11 |         85 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Dashboard.jsx                            | JavaScript JSX |        104 |          8 |         15 |        127 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Insights.jsx                             | JavaScript JSX |          9 |          2 |          2 |         13 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Reports.jsx                              | JavaScript JSX |          9 |          2 |          2 |         13 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Transactions.css                         | PostCSS        |        416 |        111 |         98 |        625 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Transactions.jsx                         | JavaScript JSX |        116 |          9 |         16 |        141 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\utils\calculations.js                          | JavaScript     |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\utils\csvParser.js                             | JavaScript     |          0 |          0 |          1 |          1 |
+| c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\utils\dataHelpers.js                           | JavaScript     |          0 |          0 |          1 |          1 |
+| Total                                                                                                          |                |      2,307 |        597 |        500 |      3,404 |
++----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

@@ -1,0 +1,51 @@
+"filename", "language", "JavaScript", "PostCSS", "JavaScript JSX", "comment", "blank", "total"
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\App.css", "PostCSS", 0, 0, 0, 42, 1, 43
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\App.jsx", "JavaScript JSX", 0, 0, 30, 0, 9, 39
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\budget\BudgetAlerts.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\budget\BudgetList.css", "PostCSS", 0, 74, 0, 20, 15, 109
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\budget\BudgetList.jsx", "JavaScript JSX", 0, 0, 84, 51, 25, 160
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\categories\CategoryForm.css", "PostCSS", 0, 70, 0, 25, 19, 114
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\categories\CategoryForm.jsx", "JavaScript JSX", 0, 0, 174, 19, 27, 220
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\categories\CategoryList.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\common\Button.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\common\Card.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\common\Input.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\common\Modal.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\dashboard\RecentTransactions.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\dashboard\SpendingChart.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\dashboard\SummaryCard.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\insights\ChatInterface.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\insights\InsightCard.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\Layout.css", "PostCSS", 0, 81, 0, 11, 18, 110
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\Layout.jsx", "JavaScript JSX", 0, 0, 32, 7, 8, 47
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\Navbar.css", "PostCSS", 0, 65, 0, 11, 15, 91
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\Navbar.jsx", "JavaScript JSX", 0, 0, 26, 2, 12, 40
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\SideBar.css", "PostCSS", 0, 56, 0, 9, 9, 74
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\Sidebar.jsx", "JavaScript JSX", 0, 0, 38, 9, 3, 50
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\layout\ThemeBtn.jsx", "JavaScript JSX", 0, 0, 18, 8, 6, 32
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\transactions\TransactionFilters.jsx", "JavaScript JSX", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\transactions\TransactionForm.css", "PostCSS", 0, 59, 0, 10, 13, 82
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\transactions\TransactionForm.jsx", "JavaScript JSX", 0, 0, 120, 4, 16, 140
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\transactions\TransactionItem.jsx", "JavaScript JSX", 0, 0, 9, 0, 3, 12
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\components\transactions\TransactionList.jsx", "JavaScript JSX", 0, 0, 52, 5, 9, 66
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\context\FinanceContext.jsx", "JavaScript JSX", 0, 0, 100, 37, 27, 164
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\context\ThemeContext.jsx", "JavaScript JSX", 0, 0, 11, 3, 4, 18
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\hooks\useCategories.js", "JavaScript", 39, 0, 0, 0, 11, 50
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\hooks\useLocalStorage.js", "JavaScript", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\hooks\useTransactions.js", "JavaScript", 37, 0, 0, 6, 11, 54
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\index.css", "PostCSS", 0, 0, 0, 68, 1, 69
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\main.jsx", "JavaScript JSX", 0, 0, 12, 0, 2, 14
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Budget.css", "PostCSS", 0, 173, 0, 58, 37, 268
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Budget.jsx", "JavaScript JSX", 0, 0, 107, 10, 15, 132
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Categories.css", "PostCSS", 0, 65, 0, 15, 12, 92
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Categories.jsx", "JavaScript JSX", 0, 0, 67, 15, 12, 94
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Dashboard.css", "PostCSS", 0, 54, 0, 20, 11, 85
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Dashboard.jsx", "JavaScript JSX", 0, 0, 104, 8, 15, 127
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Insights.jsx", "JavaScript JSX", 0, 0, 9, 2, 2, 13
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Reports.jsx", "JavaScript JSX", 0, 0, 9, 2, 2, 13
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Transactions.css", "PostCSS", 0, 416, 0, 111, 98, 625
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\pages\Transactions.jsx", "JavaScript JSX", 0, 0, 116, 9, 16, 141
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\utils\calculations.js", "JavaScript", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\utils\csvParser.js", "JavaScript", 0, 0, 0, 0, 1, 1
+"c:\Shweta\Coding\Web Development\React_2.0\Personal-Finance\src\utils\dataHelpers.js", "JavaScript", 0, 0, 0, 0, 1, 1
+"Total", "-", 76, 1113, 1118, 597, 500, 3404

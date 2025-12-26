@@ -8,6 +8,7 @@ import { DefinedRange } from 'react-date-range';
 import { useState } from 'react';
 import useTransactions from '../hooks/useTransactions';
 import { startOfMonth, format } from 'date-fns';
+import BudgetAlerts from '../components/budget/BudgetAlerts';
 
  
 const Budget = () => {
@@ -22,6 +23,7 @@ const Budget = () => {
         }
     ]);
     const { startDate, endDate } = state[0];
+    const [showCalender, setShowCalender] = useState(false);
    const { 
         transactions: filteredTransactions,  // The filtered array
         totalExpense,                        // Already calculated by hook
@@ -58,16 +60,7 @@ return (
    <div className="budget-summary-wrapper">
 
         <div className='header-summary-sec'>
-            <div className="date-card">
-                <DefinedRange
-                    onChange={item => {
-                        const dateName = item;
-                        setState([item.selection])
-                    }}
-                    ranges={state}
-                    showSelectionPreview={true}
-                />
-            </div>
+            
             {/* Total Budget (Neutral) */}
             <div className='summary-card neutral'>
                 <span className="stat-label">Total Budget</span>
@@ -102,10 +95,43 @@ return (
                 ></div>
             </div>
         </div>
+
+        <button 
+            className="add-btn" 
+            onClick={() => setShowCalender(!showCalender)}>
+            {showCalender ? "Hide" : "+ Select Date Range"}
+        </button>
+        <div className="date-card">
+            {showCalender && (
+                <div className="form-wrapper">
+                    <DefinedRange
+                        onChange={item => {
+                            const dateName = item;
+                            setState([item.selection])
+                        }}
+                        ranges={state}
+                        showSelectionPreview={true}
+                    />
+                        
+                </div>
+            )}
+                
+        </div>
+        <div>
+            <h1>Alerts</h1>
+                <BudgetAlerts 
+                startDate={startDate}  
+                endDate={endDate}
+                type={"fixed"}/>
+
+                 <BudgetAlerts 
+                startDate={startDate}  
+                endDate={endDate}
+                type={"variable"}/>
+        </div>
         <div className='main-content'>
-            <h2>{`Category wise budget status from ${format(startDate, 'MMM d')} to ${format(endDate, 'MMM d, yyyy')}`}</h2>
-            <div></div>
-           
+            <h1>{`Category wise budget status from ${format(startDate, 'MMM d')} to ${format(endDate, 'MMM d, yyyy')}`}</h1>
+            
             <div className='category-wise-bl'>
                 <div>
                     <h2>Fixed Category List:</h2>
@@ -124,6 +150,7 @@ return (
                     />
                 </div>
             </div>
+
         </div>
    </div>
 );

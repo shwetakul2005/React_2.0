@@ -13,11 +13,6 @@ const Categories = () => {
       return `₹${Number(amount).toLocaleString()}`};
 
    const handleEdit = (id) => {
-      // if(showForm===true) {
-      // } 
-      // else{
-      //    setEditCategory(null)
-      // }
       setShowForm(!showForm);
       setEditCategory(id);
    }
@@ -50,10 +45,14 @@ const Categories = () => {
                 <h4>{category.name}</h4> {/* Category Name */}
                 <p>{formatMoney(category.budgetLimit)}</p> {/* Budget Limit */}
               </div>
+
+              {category.isRecurring && (
+                  <div></div>
+              )}
+
               
               {/* Buttons */}
-              <div className='category-actions'>
-                  
+              <div className='category-actions'>   
                  {/* 2. The Button toggles the state */}
                   <button 
                      className="edit-btn" 

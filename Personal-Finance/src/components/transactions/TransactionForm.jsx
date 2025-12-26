@@ -67,7 +67,14 @@ const TransactionForm = () => {
     }
 
     function onChangeCategory(e) {
-        setCategoryID(e.target.value);
+        const cat_id = e.target.value
+        // if(cat_id === "fixed"){
+        //     setAmount(e.budgetLimit);
+            console.log(`type of cat here:${cat_id.type}`);
+        // }
+        // else if(e.type === "variable") {
+            setCategoryID(e.target.value);
+        // }
     }
     function onChangeDate(e) {
         setDate(e.target.value);
@@ -81,27 +88,11 @@ const TransactionForm = () => {
 
     return(
         <form onSubmit={handleSubmit} className="transaction-form" >
-            <label>enter amount:
-                <input
-                    type="number"
-                    value={amount}
-                    onChange={onChangeAmount}
-                /> 
-            </label> 
-            <div></div>
-            <label>enter description:
-                <input
-                    type="text"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />  
-            </label>
-            <div></div>
             <label>enter category:    
                 Category:
                 <select
                     value={category_id}
-                    onChange={(e) => setCategoryID(e.target.value)}
+                    onChange={onChangeCategory}
                 >
                     <option value="">Select category</option>
                     {categories.map(cat => (
@@ -111,6 +102,24 @@ const TransactionForm = () => {
                     ))}
                 </select>
             </label>
+            <div></div>
+            <label>enter description:
+                <input
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />  
+            </label>
+            <div></div>
+            
+            <label>enter amount:
+                <input
+                    type="number"
+                    value={amount}
+                    onChange={onChangeAmount}
+                    placeholder={amount}
+                /> 
+            </label> 
             <div></div>
             <label>enter date:
                 <input

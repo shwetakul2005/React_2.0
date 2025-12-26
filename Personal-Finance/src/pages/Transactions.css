@@ -623,3 +623,143 @@ html.dark .rdrStaticRange {
     background-color: transparent !important;
     color: var(--sidebar-text) !important;
 }
+
+
+/* =========================================
+   1. Page Layout & Spacing
+   ========================================= */
+.transactions-page-wrapper {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* =========================================
+   2. Balance Stats (Hero Section)
+   ========================================= */
+.balance-stats {
+    background-color: var(--background-color);
+    border: 1px solid var(--sidebar-border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-around; /* Distributes balance and expense */
+    align-items: center;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.balance-stats h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--sidebar-text);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Specific highlight for the money amounts */
+.balance-stats h2::after {
+    content: ""; /* This space is handled by the JS variables */
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-color);
+}
+
+/* =========================================
+   3. Control Center (Search & Filters)
+   ========================================= */
+.controls-wrapper {
+    background-color: var(--sidebar-bg); /* Subtle contrast */
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid var(--sidebar-border);
+}
+
+/* Make search box the dominant element */
+.search-box {
+    flex: 2; 
+    min-width: 250px;
+}
+
+.filter-box {
+    flex: 1;
+    min-width: 180px;
+}
+
+.type-btns {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 0.5rem;
+}
+
+/* =========================================
+   4. Action Buttons (Toggle Form / Calendar)
+   ========================================= */
+.transaction-container {
+    display: flex;
+    justify-content: flex-end; /* Align 'Add New' to the right */
+    margin-bottom: 1rem;
+}
+
+.add-btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    background-color: var(--nav-title-color);
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Style for the "Select Date Range" button specifically */
+.controls-wrapper > .add-btn {
+    background-color: transparent;
+    border: 1px solid var(--sidebar-border);
+    color: var(--sidebar-text);
+}
+
+.controls-wrapper > .add-btn:hover {
+    background-color: var(--sidebar-hover-bg);
+    color: var(--text-color);
+}
+
+/* =========================================
+   5. Vertical List Spacing
+   ========================================= */
+/* This ensures the vertical list doesn't touch the filters */
+.transaction-list-vertical {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* =========================================
+   6. Mobile Optimization
+   ========================================= */
+@media (max-width: 768px) {
+    .balance-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .controls-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .type-btns {
+        justify-content: space-between;
+    }
+}

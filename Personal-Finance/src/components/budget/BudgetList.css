@@ -107,3 +107,32 @@
 
 /* Ensure the shared progress bar styles from previous step work here */
 /* (This assumes you added the CSS from the previous response) */
+
+/* =========================================
+   Budget Meta Section (The Info Row)
+   ========================================= */
+.budget-meta {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column; /* Stacks Due Date under 'Not Paid' */
+    gap: 0.25rem;
+    min-height: 2.2rem; /* Maintains consistent card height */
+}
+
+/* Base style for spans inside meta */
+.budget-meta span {
+    font-weight: 500;
+    display: block;
+}
+
+/* --- Variable Budget Text --- */
+.text-muted {
+    color: var(--sidebar-text);
+    opacity: 0.8;
+}
+
+.text-danger {
+    color: var(--color-danger); /* Uses your global red variable */
+    font-weight: 700;
+}

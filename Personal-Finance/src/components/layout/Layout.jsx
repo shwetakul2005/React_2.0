@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 function Layout({ children }) {
   // console.log("Layout rendering!")
-  const [themeMode, setThemeMode] = useState("light")
+  const [themeMode, setThemeMode] = useState("dark")
   // console.log("Theme mode:", themeMode)
   const lightTheme = () => {
     // console.log("Light theme function called")

@@ -124,7 +124,7 @@ const BudgetList = ({ startDate, endDate, type }) => {
                             {isFixed && (cat.remaining===cat.budgetLimit)&&(
                                 <span>
                                 <div>Not Paid</div>
-                                <div>Due Date: {cat.dueDate}</div>     
+                                <div>Due Date: {(new Date(cat.dueDate).toDateString())}</div>     
                                 </span>
                             )}
                             {isFixed && (cat.remaining===0)&&(

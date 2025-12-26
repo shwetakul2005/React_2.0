@@ -16,7 +16,6 @@ import { addDays, startOfMonth } from 'date-fns';
  
 const Transactions = (props) => {
    const navigate = useNavigate();
-   const {totalExpense, balance} = useTransactions();
    const [showForm, setShowForm] = useState(false);
    const {categories} = useFinance();
    const [showCalender, setShowCalender] = useState(false);
@@ -25,10 +24,11 @@ const Transactions = (props) => {
    const [selectedType, setSelectedType] = useState("")
    
    const [state, setState] = useState([{
-        startDate: startOfMonth(new Date()),
-        endDate: new Date(),
-        key: 'selection'
+       startDate: startOfMonth(new Date()),
+       endDate: new Date(),
+       key: 'selection'
     }]);
+   const {totalExpense, balance} = useTransactions({date:state});
    const effectiveDate = props.date || state;
    const effectiveSearch = props.searchTerm || searchTerm;
    const effectiveCategory = props.category || selectedCategory;
@@ -47,7 +47,7 @@ const Transactions = (props) => {
    return (
     <>
         {/* <DateRangePicker /> */}
-        <h1 className="transactions-header">Transactions here</h1>  
+        
         <div className="balance-stats">
             <h2>Your current Balance is: {formatMoney(balance)}</h2>
             <h2>Your Total Expense is: {formatMoney(totalExpense)}</h2>
@@ -62,13 +62,13 @@ const Transactions = (props) => {
                     /> 
                     {/* {console.log(searchTerm)} */}
             </div>
-            <div className='dateRangeSelector'>
                 <button 
                     className="add-btn" 
                     onClick={() => setShowCalender(!showCalender)}
                     >
-                    {showCalender ? "" : "+ Select Date Range"}
+                    {showCalender ? "Hide" : "+ Select Date Range"}
                 </button>
+            <div className='dateRangeSelector'>
                 {showCalender && (
                     <div className="form-wrapper">
                         <DateRangePicker

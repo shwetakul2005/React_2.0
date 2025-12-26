@@ -23,7 +23,7 @@ export default function ThemeBtn() {
             /> */}
             <div></div>
             {/* <span >Toggle Theme</span> */}
-            <button className="theme-btn" onClick={toggleTheme}>{themeMode === "dark" ? "Light Mode" : "Dark Mode"}</button>
+            <button className="theme-btn" onClick={toggleTheme}>{themeMode === "light" ? "Dark Mode" : "Light Mode"}</button>
         </label>
     );
 }
