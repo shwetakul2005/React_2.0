@@ -11,6 +11,7 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRangePicker  } from 'react-date-range';
 import { addDays, startOfMonth } from 'date-fns';
+import TransactionImport from '../components/transactions/TransactionImport';
 
 
  
@@ -68,6 +69,7 @@ const Transactions = (props) => {
                     >
                     {showCalender ? "Hide" : "+ Select Date Range"}
                 </button>
+                
             <div className='dateRangeSelector'>
                 {showCalender && (
                     <div className="form-wrapper">
@@ -115,14 +117,21 @@ const Transactions = (props) => {
             </div>
                 
         </div>
+        <div>
+                <TransactionImport />
+            </div>
         <div className="transaction-container">
             {/* 2. The Button toggles the state */}
+            
             <button 
                 className="add-btn" 
                 onClick={() => setShowForm(!showForm)}
                 >
                 {showForm ? "Cancel Transaction" : "+ Add New Transaction"}
             </button>
+            {/* <div></div> */}
+            
+            
 
             {/* 3. Conditional Rendering: Only show form if showForm is TRUE */}
             {showForm && (
@@ -131,10 +140,10 @@ const Transactions = (props) => {
                 </div>
             )}
         </div>
-        {/* {console.log(filterResult)} */}
+        
+        {console.log(filterResult)}
         <TransactionList  transactions={filterResult.transactions}/>
-    
-            </>
+    </>
    );
 };
  

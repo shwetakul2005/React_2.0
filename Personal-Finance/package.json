@@ -17,6 +17,7 @@
     "@heroui/theme": "^2.4.23",
     "@mui/material": "^7.3.6",
     "framer-motion": "^12.23.25",
+    "papaparse": "^5.5.3",
     "react": "^19.2.1",
     "react-date-range": "^2.0.1",
     "react-dom": "^19.2.1",

@@ -27,7 +27,7 @@ const NavBar = () => {
     </li>
 
     <li className="nav-right">
-      <img src={pp} className="pp" alt="logo" />
+      {/* <img src={pp} className="pp" alt="logo" /> */}
       {/* <button className="theme-btn" onClick={themeToggle}>Theme</button> */}
       <ThemeBtn />
     </li>

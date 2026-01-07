@@ -58,7 +58,7 @@ const Budget = () => {
 
 return (
    <div className="budget-summary-wrapper">
-
+        <h1>Budget Overview</h1>
         <div className='header-summary-sec'>
             
             {/* Total Budget (Neutral) */}

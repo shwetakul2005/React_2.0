@@ -22,6 +22,13 @@ function FinanceContextProvider({children}){
         setTransactions([...transactions, transaction])
     }
 
+    const addBulkTransaction = (newTransactionArray) => {
+        setTransactions(transactions => [
+            ...transactions,
+            ...newTransactionArray
+        ]);
+    };
+
     const deleteTransaction = (id) => {
         // Set the transactions to be the current list, filtered so that we keep everything 
         // where the ID is not the one we want to remove.
@@ -137,7 +144,8 @@ function FinanceContextProvider({children}){
     deleteTransaction,
     addCategory,
     deleteCategory,
-    updateCategory
+    updateCategory,
+    addBulkTransaction
   }
   return (
     <FinanceContext.Provider value={value}>
