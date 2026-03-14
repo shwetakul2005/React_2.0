@@ -9,7 +9,7 @@ import './dashboard.css'; // Don't forget to import the CSS
 
 const Dashboard = () => {
    const navigate = useNavigate();
-   const { transactions } = useFinance();
+   const { transactions, categories } = useFinance();
    // const { totalExpense } = useTransactions(); // Unused in snippet, but okay
 
    const income = transactions.filter(t => t.type === "income").reduce((s, t) => s + t.amount, 0);
@@ -28,16 +28,24 @@ const Dashboard = () => {
       return { date: t.date, balance: runningBalance };
    });
 
+   // Group ONLY expenses by category_id, then resolve name via lookup
    const categoryTotals = {};
-   transactions.forEach(t => {
-      if (!categoryTotals[t.category]) categoryTotals[t.category] = 0;
-      categoryTotals[t.category] += t.amount;
-   });
+   transactions
+      .filter(t => t.type === 'expense')
+      .forEach(t => {
+         const catId = t.category_id;
+         if (!categoryTotals[catId]) categoryTotals[catId] = 0;
+         categoryTotals[catId] += t.amount;
+      });
 
-   const pieData = Object.keys(categoryTotals).map(cat => ({
-      name: cat,
-      value: categoryTotals[cat]
-   }));
+   const pieData = Object.keys(categoryTotals).map(catId => {
+      const cat = categories.find(c => c.id === Number(catId));
+      return {
+         name: cat?.name || 'Unknown',
+         value: categoryTotals[catId],
+         color: cat?.color || '#8884d8'
+      };
+   });
 
    // Colors for Pie Chart segments
    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
@@ -107,7 +115,7 @@ const Dashboard = () => {
                            label
                         >
                            {pieData.map((entry, index) => (
-                              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                              <Cell key={`cell-${index}`} fill={entry.color || COLORS[index % COLORS.length]} />
                            ))}
                         </Pie>
                         <Tooltip 
