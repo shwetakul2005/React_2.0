@@ -1,0 +1,174 @@
+/* =========================================
+   Reports — Header with Range Selector
+   ========================================= */
+.reports-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.reports-header h1 {
+    margin: 0;
+}
+
+.range-selector {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.reports-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* =========================================
+   Reports — Summary Stats
+   ========================================= */
+.reports-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* =========================================
+   Reports — Empty State
+   ========================================= */
+.reports-empty {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--sidebar-bg);
+    border: 1px dashed var(--sidebar-border);
+    border-radius: 12px;
+    color: var(--sidebar-text);
+}
+
+/* =========================================
+   Reports — Taller chart for Category lines
+   ========================================= */
+.chart-wrapper-tall {
+    height: 350px;
+}
+
+/* =========================================
+   Reports — Data Table
+   ========================================= */
+.reports-table-wrapper {
+    overflow-x: auto;
+}
+
+.reports-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.reports-table th {
+    text-align: left;
+    padding: 0.6rem 1rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sidebar-text);
+    border-bottom: 2px solid var(--sidebar-border);
+    font-weight: 600;
+}
+
+.reports-table td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--sidebar-border);
+    color: var(--text-color);
+}
+
+.reports-table tbody tr:hover {
+    background-color: var(--sidebar-hover-bg);
+}
+
+.reports-table .income-text {
+    color: var(--color-safe, #16a34a);
+    font-weight: 600;
+}
+
+.reports-table .expense-text {
+    color: var(--color-danger, #ef4444);
+    font-weight: 600;
+}
+
+/* =========================================
+   Mobile
+   ========================================= */
+@media (max-width: 768px) {
+    .reports-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .reports-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .chart-wrapper-tall {
+        height: 280px;
+    }
+}
+
+@media (max-width: 400px) {
+    .reports-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================
+   Print Styles (Download PDF)
+   ========================================= */
+@media print {
+    /* Hide sidebar, navbar, buttons */
+    nav, .sidebar, .no-print, .range-selector, .btn-filter {
+        display: none !important;
+    }
+
+    /* Reset page layout */
+    body, html {
+        background: white !important;
+        color: black !important;
+    }
+
+    .page_content {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Cards print flat */
+    .chart-card, .stat-card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+        break-inside: avoid;
+    }
+
+    /* Charts need explicit dimensions for print */
+    .chart-wrapper, .chart-wrapper-tall {
+        height: 250px !important;
+    }
+
+    /* Table rows don't cut across pages */
+    .reports-table tr {
+        break-inside: avoid;
+    }
+
+    .reports-table .income-text { color: #16a34a !important; }
+    .reports-table .expense-text { color: #ef4444 !important; }
+
+    .stat-value.safe   { color: #16a34a !important; }
+    .stat-value.danger  { color: #ef4444 !important; }
+
+    /* Title for the print */
+    .reports-header h1::after {
+        content: " — PocketPal";
+        font-size: 0.6em;
+        font-weight: 400;
+        color: #888;
+    }
+}
