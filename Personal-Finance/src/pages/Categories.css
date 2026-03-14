@@ -1,79 +1,136 @@
 /* --- 1. Card List Container --- */
 .category-card-list {
-  /* Enables responsive grid layout for the cards */
   display: grid;
-  /* Creates columns that fit as many cards as possible, minimum size 300px */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px; /* Space between the cards */
+  gap: 20px;
   padding: 20px 0;
 }
 
 /* --- 2. Individual Category Card --- */
 .category-card {
-  /* A nice card-like appearance */
-  display: flex; /* Use flexbox for internal layout */
-  align-items: center; /* Vertically center items */
+  display: flex;
+  flex-direction: column;        /* stack top row + action strip vertically */
   padding: 15px 20px;
-  /* background-color: #ffffff;  */
-  border: 1px solid #e0e0e0; /* Subtle border */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
-  transition: transform 0.2s; /* Smooth hover effect */
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  overflow: hidden;
 }
 
 .category-card:hover {
-  transform: translateY(-2px); /* Lift the card slightly on hover */
+  transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* --- 3. Colored Indicator (Circle) --- */
-.category-indicator {
-  width: 15px;
-  height: 15px;
-  /* The color must be applied inline in your React component using category.color */
-  border-radius: 50%; /* Makes it a circle */
-  margin-right: 15px;
-  /* Example style if color is applied inline: style={{ backgroundColor: category.color }} */
+/* Card turns slightly accented when expanded */
+.category-card.expanded {
+  border-color: #2196f3;
+  box-shadow: 0 6px 16px rgba(33, 150, 243, 0.15);
 }
 
-/* --- 4. Details (Name and Budget) --- */
+/* --- 3. Top row (circle + details + pencil) --- */
+.category-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* --- 4. Colored Indicator (Circle) --- */
+.category-indicator {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* --- 5. Details (Name and Budget) --- */
 .category-details {
-  /* Takes up maximum available space */
   flex-grow: 1;
-  margin-right: 15px;
 }
 
 .category-details h4 {
-  margin: 0 0 4px 0; /* Category Name */
-  font-size: 1.1em;
+  margin: 0 0 2px 0;
+  font-size: 1.05em;
   color: var(--text-color);
 }
 
 .category-details p {
-  margin: 0; /* Budget Limit */
-  font-size: 0.9em;
+  margin: 0 0 4px 0;
+  font-size: 0.88em;
+  color: var(--text-color);
+  opacity: 0.75;
+}
+
+/* Small badge showing 'fixed' or 'variable' */
+.category-type-badge {
+  display: inline-block;
+  font-size: 0.72em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 20px;
+  background-color: rgba(33, 150, 243, 0.12);
+  color: #2196f3;
+}
+
+/* --- 6. Pencil icon button --- */
+.pencil-btn {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 1.1em;
+  cursor: pointer;
+  padding: 5px 8px;
+  line-height: 1;
+  transition: background-color 0.2s, border-color 0.2s;
+  flex-shrink: 0;
   color: var(--text-color);
 }
 
-/* --- 5. Action Buttons --- */
+.pencil-btn:hover {
+  background-color: rgba(33, 150, 243, 0.1);
+  border-color: rgba(33, 150, 243, 0.3);
+}
+
+/* '✕' close state */
+.pencil-btn.active {
+  background-color: rgba(33, 150, 243, 0.12);
+  border-color: rgba(33, 150, 243, 0.4);
+  font-style: normal;
+}
+
+/* --- 7. Action strip (Edit + Delete) --- */
 .category-actions {
-  /* Container for the buttons */
   display: flex;
-  gap: 10px; /* Space between buttons */
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  animation: fadeSlideDown 0.18s ease;
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .category-actions button {
+  flex: 1;
   padding: 8px 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 7px;
   cursor: pointer;
   font-weight: 600;
-  transition: background-color 0.2s;
+  font-size: 0.88em;
+  transition: background-color 0.2s, opacity 0.2s;
 }
 
-/* Edit Button Style */
+/* Edit Button */
 .category-actions .edit-btn {
-  background-color: #2196f3; /* Blue */
+  background-color: #2196f3;
   color: white;
 }
 
@@ -81,12 +138,12 @@
   background-color: #0b7dda;
 }
 
-/* Delete Button Style */
+/* Delete Button */
 .category-actions .delete-btn {
-  background-color: #f44336; /* Red */
+  background-color: #f44336;
   color: white;
 }
 
 .category-actions .delete-btn:hover {
   background-color: #d32f2f;
-}
+}

@@ -31,48 +31,61 @@ const Categories = () => {
         
         {/* Apply the list container class */}
         <div className='category-card-list'> 
-          {categories.map((category) => (
-            // Apply the individual card class
-            <div key={category.id} className='category-card'> 
-              
-              {/* Colored Circle - Apply color using inline style */}
-              <div 
-                className='category-indicator' 
-                style={{ backgroundColor: category.color || '#ccc' }} 
-              ></div>
-              
-              {/* Category Name and Budget */}
-              <div className='category-details'>
-                <h4>{category.name}</h4> {/* Category Name */}
-                <p>{formatMoney(category.budgetLimit)}</p> {/* Budget Limit */}
-              </div>
+          {categories.map((category) => {
+            const isExpanded = editcategory === category.id;
+            return (
+              <div key={category.id} className={`category-card ${isExpanded ? 'expanded' : ''}`}> 
+                
+                {/* Top row: indicator + details + pencil icon */}
+                <div className="category-card-top">
+                  {/* Colored Circle */}
+                  <div 
+                    className='category-indicator' 
+                    style={{ backgroundColor: category.color || '#ccc' }} 
+                  ></div>
+                  
+                  {/* Category Name and Budget */}
+                  <div className='category-details'>
+                    <h4>{category.name}</h4>
+                    <p>{formatMoney(category.budgetLimit)}</p>
+                    <span className="category-type-badge">{category.type}</span>
+                  </div>
 
-              {category.isRecurring && (
-                  <div></div>
-              )}
-
-              
-              {/* Buttons */}
-              <div className='category-actions'>   
-                 {/* 2. The Button toggles the state */}
-                  <button 
-                     className="edit-btn" 
-                     onClick={() => handleEdit(category.id)}
+                  {/* Pencil toggle button — top-right corner */}
+                  <button
+                    className={`pencil-btn ${isExpanded ? 'active' : ''}`}
+                    onClick={() => handleEdit(category.id)}
+                    title={isExpanded ? "Close" : "Edit / Delete"}
                   >
-                     {editcategory === category.id ? "Cancel" : "Edit"}
+                    {isExpanded ? '✕' : '✏️'}
                   </button>
-                  <button 
-                  className="delete-btn" 
-                  onClick={() => {
+                </div>
+
+                {/* Action strip — only visible when pencil is clicked */}
+                {isExpanded && (
+                  <div className='category-actions'>
+                    <button 
+                      className="edit-btn" 
+                      onClick={() => handleEdit(category.id)}
+                    >
+                      Edit Details
+                    </button>
+                    <button 
+                      className="delete-btn" 
+                      onClick={() => {
                         const isConfirmed = confirm(`Are you sure you want to delete ${category.name} category?`);
                         if (isConfirmed) {
-                            // Only call the deletion function if the user clicked 'OK'
-                            deleteCategory(category.id);
+                          deleteCategory(category.id);
                         }
-                     }}>Delete</button>
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
               </div>
-            </div>
-          ))}
+            );
+          })}
          
         </div>
         {/* Edit form — shown below the card being edited */}
