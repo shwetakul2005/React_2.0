@@ -1,31 +1,63 @@
-/* ── Insights Page ──────────────────────── */
-.insights-page {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-}
-
-.insights-page h1 {
-    font-size: 1.8rem;
-    color: var(--text-color);
-    margin-bottom: 0.25rem;
-}
-
-.insights-subtitle {
-    color: var(--sidebar-text);
-    font-size: 0.95rem;
+/* =========================================
+   Insights — Stat Cards Grid
+   ========================================= */
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
     margin-bottom: 2rem;
 }
 
-/* ── Insight Cards Grid ────────────────── */
-.insight-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2.5rem;
+.stat-card {
+    background-color: var(--background-color);
+    border: 1px solid var(--sidebar-border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* ── Empty state ───────────────────────── */
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card.alert {
+    border-left: 3px solid #ef4444;
+}
+
+html.dark .stat-card {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.stat-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sidebar-text);
+    font-weight: 600;
+}
+
+.stat-value {
+    margin: 0 0 0.25rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-color);
+}
+
+.stat-value.safe   { color: var(--color-safe, #16a34a); }
+.stat-value.warn   { color: #eab308; }
+.stat-value.danger  { color: var(--color-danger, #ef4444); }
+
+.stat-detail {
+    font-size: 0.82rem;
+    color: var(--sidebar-text);
+}
+
+/* =========================================
+   Insights — Empty State
+   ========================================= */
 .insights-empty {
     text-align: center;
     padding: 3rem 2rem;
@@ -33,36 +65,79 @@
     border: 1px dashed var(--sidebar-border);
     border-radius: 12px;
     color: var(--sidebar-text);
-    font-size: 1.05rem;
     margin-bottom: 2rem;
 }
 
-/* ── Ask AI Section ────────────────────── */
-.ask-ai-section {
-    background: var(--background-color);
-    border: 1px solid var(--sidebar-border);
-    border-radius: 14px;
-    padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+/* =========================================
+   Spending Breakdown
+   ========================================= */
+.breakdown-card {
+    margin-bottom: 2rem;
 }
 
-.ask-ai-section h2 {
-    font-size: 1.25rem;
-    color: var(--text-color);
-    margin: 0 0 0.25rem;
+.breakdown-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
-.ask-subtitle {
+.breakdown-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.breakdown-name {
+    min-width: 100px;
     font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-color);
+    text-transform: capitalize;
+}
+
+.breakdown-bar-track {
+    flex: 1;
+    height: 8px;
+    background: var(--sidebar-bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.breakdown-bar-fill {
+    height: 100%;
+    background: var(--nav-title-color);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+}
+
+.breakdown-amount {
+    min-width: 80px;
+    text-align: right;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.breakdown-pct {
+    min-width: 36px;
+    text-align: right;
+    font-size: 0.78rem;
     color: var(--sidebar-text);
-    margin-bottom: 1.25rem;
 }
 
-.ask-subtitle strong {
-    color: var(--nav-title-color);
+/* =========================================
+   Ask AI Section
+   ========================================= */
+.ask-card {
+    margin-bottom: 2rem;
 }
 
-/* ── Form ──────────────────────────────── */
+.ask-meta {
+    font-size: 0.82rem;
+    color: var(--sidebar-text);
+    margin: -0.5rem 0 1rem;
+}
+
 .ask-form {
     display: flex;
     gap: 10px;
@@ -71,14 +146,14 @@
 
 .ask-form input {
     flex: 1;
-    padding: 0.75rem 1rem;
-    font-size: 0.95rem;
+    padding: 0.7rem 1rem;
+    font-size: 0.92rem;
+    font-family: inherit;
     border: 1px solid var(--sidebar-border);
-    border-radius: 10px;
+    border-radius: 8px;
     background: var(--sidebar-bg);
     color: var(--text-color);
     outline: none;
-    font-family: inherit;
     transition: border-color 0.2s;
 }
 
@@ -86,106 +161,93 @@
     border-color: var(--nav-title-color);
 }
 
-.ask-form button {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.95rem;
-    font-weight: 700;
-    border: none;
-    border-radius: 10px;
-    background: var(--nav-title-color);
-    color: #fff;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: filter 0.2s, transform 0.1s;
-}
-
-.ask-form button:hover:not(:disabled) {
-    filter: brightness(1.1);
-    transform: translateY(-1px);
-}
-
-.ask-form button:disabled {
+.ask-form .add-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
 }
 
-/* ── Suggestion Chips ──────────────────── */
+/* ── Suggestion Chips ── */
 .suggestions {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 1rem;
 }
 
 .suggestion-chip {
-    padding: 6px 14px;
-    font-size: 0.82rem;
+    padding: 5px 12px;
+    font-size: 0.8rem;
     font-weight: 500;
     border: 1px solid var(--sidebar-border);
-    border-radius: 20px;
+    border-radius: 6px;
     background: transparent;
     color: var(--sidebar-text);
     cursor: pointer;
     transition: all 0.2s;
+    font-family: inherit;
 }
 
 .suggestion-chip:hover {
     background: var(--sidebar-hover-bg);
     border-color: var(--nav-title-color);
-    color: var(--nav-title-color);
-}
-
-/* ── AI Answer ─────────────────────────── */
-.ai-answer {
-    margin-top: 1.5rem;
-    background: var(--sidebar-bg);
-    border: 1px solid var(--sidebar-border);
-    border-radius: 12px;
-    overflow: hidden;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-.ai-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0.75rem 1.25rem;
-    border-bottom: 1px solid var(--sidebar-border);
-    font-size: 0.9rem;
     color: var(--text-color);
 }
 
-.ai-avatar {
-    font-size: 1.3rem;
+/* ── AI Response ── */
+.ai-response {
+    margin-top: 1.25rem;
+    border: 1px solid var(--sidebar-border);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.ai-body {
-    padding: 1rem 1.25rem;
-    font-size: 0.92rem;
+.ai-response-header {
+    padding: 0.6rem 1rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--sidebar-text);
+    background: var(--sidebar-bg);
+    border-bottom: 1px solid var(--sidebar-border);
+}
+
+.ai-response-body {
+    padding: 1rem;
+    font-size: 0.9rem;
     line-height: 1.65;
     color: var(--text-color);
 }
 
-.ai-body p {
-    margin: 0 0 0.5rem;
+.ai-response-body p {
+    margin: 0 0 0.4rem;
 }
 
-.ai-body p:last-child {
+.ai-response-body p:last-child {
     margin-bottom: 0;
 }
 
-/* ── Mobile ────────────────────────────── */
+/* =========================================
+   Mobile
+   ========================================= */
 @media (max-width: 600px) {
+    .insights-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
     .ask-form {
         flex-direction: column;
     }
 
-    .insight-cards-grid {
+    .breakdown-name {
+        min-width: 70px;
+    }
+
+    .breakdown-amount {
+        min-width: 60px;
+    }
+}
+
+@media (max-width: 400px) {
+    .insights-grid {
         grid-template-columns: 1fr;
     }
 }
