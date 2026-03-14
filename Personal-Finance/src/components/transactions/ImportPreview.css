@@ -124,3 +124,53 @@ html.dark .import-btn {
     transform: none;
     box-shadow: none;
 }
+
+/* --- Cancel Button --- */
+.cancel-btn {
+    background-color: transparent;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--sidebar-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.cancel-btn:hover {
+    background-color: rgba(0,0,0,0.06);
+    border-color: #aaa;
+}
+
+/* Makes preview-actions a flex row */
+.preview-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    grid-column: 1 / -1;
+}
+
+/* --- Duplicate skip warning --- */
+.skip-warning {
+    color: #e65100;
+    font-size: 0.88em;
+    font-weight: 600;
+    margin: 0;
+    padding: 6px 10px;
+    background: rgba(230, 81, 0, 0.08);
+    border-radius: 6px;
+    grid-column: 1 / -1;
+}
+
+/* --- Import count confirmation --- */
+.import-count {
+    color: #2e7d32;
+    font-size: 0.88em;
+    font-weight: 600;
+    margin: 0;
+    padding: 6px 10px;
+    background: rgba(46, 125, 50, 0.08);
+    border-radius: 6px;
+    grid-column: 1 / -1;
+}
