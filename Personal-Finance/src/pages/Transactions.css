@@ -161,9 +161,12 @@ html.dark .t-card:hover {
 }
 
 
-.transaction-container {
-    margin-bottom: 1.5rem;
+.transaction-actions-row {
+    display: flex;
+    justify-content: flex-end; /* Align 'Add New' to the right */
+    margin-bottom: 1rem;
 }
+
 
 /* The Trigger Button */
 .add-btn {
@@ -189,8 +192,15 @@ html.dark .t-card:hover {
 /* Optional: Smooth fade-in animation for the form */
 .form-wrapper {
     animation: slideDown 0.3s ease-out forwards;
-    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
+
+.center-form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 
 @keyframes slideDown {
     from {
@@ -380,20 +390,23 @@ html.dark .btn-filter.expense.active {
 /* =========================================
    Wrapper Container
    ========================================= */
-.dateRangeSelector {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
+.date-picker-wrapper {
+  position: relative;
+  /* Ensure the dropdown positions relative to this wrapper */
+}
+
+.date-picker-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 100;
   
   /* Make it look like a card */
   background: var(--background-color);
   padding: 1rem;
   border-radius: 12px;
   border: 1px solid var(--sidebar-border);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  
-  /* Ensure it doesn't overflow on small screens */
-  overflow-x: auto; 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* =========================================
@@ -537,15 +550,9 @@ html.dark .rdrInRange {
    1. Container Constraints
    ========================================= */
 .dateRangeSelector {
+  /* No longer used explicitly as wrapper, but kept for Fallback */
   display: flex;
-  justify-content: center; /* Center it */
-  margin-bottom: 2rem;
-  
-  /* Remove any forced padding that might expand it */
-  padding: 0; 
-  background: transparent; /* Let the inner wrapper handle bg */
-  box-shadow: none;        /* Let the inner wrapper handle shadow */
-  border: none;
+  justify-content: center; margin-bottom: 2rem; padding: 0; background: transparent; box-shadow: none; border: none;
 }
 
 /* =========================================
@@ -722,13 +729,13 @@ html.dark .rdrStaticRange {
 }
 
 /* Style for the "Select Date Range" button specifically */
-.controls-wrapper > .add-btn {
+.btn-date {
     background-color: transparent;
     border: 1px solid var(--sidebar-border);
     color: var(--sidebar-text);
 }
 
-.controls-wrapper > .add-btn:hover {
+.btn-date:hover {
     background-color: var(--sidebar-hover-bg);
     color: var(--text-color);
 }

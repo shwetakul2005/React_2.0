@@ -23,6 +23,16 @@ const Transactions = (props) => {
    const [searchTerm, setSearchTerm] = useState("")
    const [selectedCategory, setSelectedCategory] = useState("")
    const [selectedType, setSelectedType] = useState("")
+   const [transactionToEdit, setTransactionToEdit] = useState(null)
+
+   const handleEdit = (transaction) => {
+      setTransactionToEdit(transaction)
+      setShowForm(true)  // open form panel
+   }
+   const handleCloseForm = () => {
+      setShowForm(false)
+      setTransactionToEdit(null)
+   }
    
    const [state, setState] = useState([{
        startDate: startOfMonth(new Date()),
@@ -63,31 +73,30 @@ const Transactions = (props) => {
                     /> 
                     {/* {console.log(searchTerm)} */}
             </div>
-                <button 
-                    className="add-btn" 
-                    onClick={() => setShowCalender(!showCalender)}
+                <div className="date-picker-wrapper">
+                    <button 
+                        className="add-btn btn-date" 
+                        onClick={() => setShowCalender(!showCalender)}
                     >
-                    {showCalender ? "Hide" : "+ Select Date Range"}
-                </button>
-                
-            <div className='dateRangeSelector'>
-                {showCalender && (
-                    <div className="form-wrapper">
-                        <DateRangePicker
-                        onChange={item => setState([item.selection])}
-                        ranges={state}
-                        showSelectionPreview={true}
-                        moveRangeOnFirstSelection={true}
-                        months={1}
-                        direction="horizontal"
-                        showMonthAndYearPickers={true}
-                    />
-                    </div>
-                )}
-                
-            </div>
+                        {showCalender ? "✕ Hide Calendar" : "📅 Select Date Range"}
+                    </button>
+                    
+                    {showCalender && (
+                        <div className="date-picker-dropdown">
+                            <DateRangePicker
+                                onChange={item => setState([item.selection])}
+                                ranges={state}
+                                showSelectionPreview={true}
+                                moveRangeOnFirstSelection={true}
+                                months={1}
+                                direction="horizontal"
+                                showMonthAndYearPickers={true}
+                            />
+                        </div>
+                    )}
+                </div>
 
-            <div className='filter-box'>
+                <div className='filter-box'>
                 <select
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
@@ -120,29 +129,33 @@ const Transactions = (props) => {
         <div>
                 <TransactionImport />
             </div>
-        <div className="transaction-container">
-            {/* 2. The Button toggles the state */}
-            
+        <div className="transaction-actions-row">
             <button 
                 className="add-btn" 
-                onClick={() => setShowForm(!showForm)}
-                >
-                {showForm ? "Cancel Transaction" : "+ Add New Transaction"}
+                onClick={() => {
+                    if (showForm && !transactionToEdit) {
+                        handleCloseForm()
+                    } else {
+                        setTransactionToEdit(null)
+                        setShowForm(!showForm)
+                    }
+                }}
+            >
+                {showForm && !transactionToEdit ? "Cancel" : "+ Add New Transaction"}
             </button>
-            {/* <div></div> */}
-            
-            
-
-            {/* 3. Conditional Rendering: Only show form if showForm is TRUE */}
-            {showForm && (
-                <div className="form-wrapper">
-                    <TransactionForm />
-                </div>
-            )}
         </div>
+
+        {showForm && (
+            <div className="form-wrapper center-form">
+                <TransactionForm 
+                    transactionToEdit={transactionToEdit}
+                    onClose={handleCloseForm}
+                />
+            </div>
+        )}
         
         {console.log(filterResult)}
-        <TransactionList  transactions={filterResult.transactions}/>
+        <TransactionList transactions={filterResult.transactions} onEdit={handleEdit}/>
     </>
    );
 };

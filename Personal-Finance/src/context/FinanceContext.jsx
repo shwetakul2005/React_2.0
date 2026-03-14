@@ -30,9 +30,11 @@ function FinanceContextProvider({children}){
     };
 
     const deleteTransaction = (id) => {
-        // Set the transactions to be the current list, filtered so that we keep everything 
-        // where the ID is not the one we want to remove.
         setTransactions(transactions.filter(t => t.id !== id))
+    }
+
+    const updateTransaction = (id, newData) => {
+        setTransactions(transactions.map(t => t.id === id ? newData : t))
     }
 
     const addCategory = (category) => {
@@ -142,6 +144,7 @@ function FinanceContextProvider({children}){
     setCategories,
     addTransaction,
     deleteTransaction,
+    updateTransaction,
     addCategory,
     deleteCategory,
     updateCategory,

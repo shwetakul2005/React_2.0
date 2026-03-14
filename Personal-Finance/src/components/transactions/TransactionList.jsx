@@ -65,8 +65,7 @@ import './TransactionList.css'
 
 
 
-const TransactionList = (props) => {
-    const filtered_transactions = props.transactions;
+const TransactionList = ({ transactions: filtered_transactions, onEdit }) => {
     const { deleteTransaction, categories } = useFinance();
     
     const cat_name = (cat_id) => {
@@ -103,6 +102,13 @@ const TransactionList = (props) => {
                         <span className={`t-amount ${transaction.type}`}>
                             {transaction.type === 'income' ? '+' : '-'} {formatMoney(transaction.amount)}
                         </span>
+                        <button
+                            className="btn-edit"
+                            title="Edit Transaction"
+                            onClick={() => onEdit && onEdit(transaction)}
+                        >
+                            ✏️
+                        </button>
                         <button 
                             className="btn-delete"
                             title="Delete Transaction"
