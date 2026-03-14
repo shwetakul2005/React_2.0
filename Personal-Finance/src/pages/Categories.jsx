@@ -7,14 +7,15 @@ import './Categories.css'; // Assuming you save the CSS above in Categories.css
 const Categories = () => {
    const {categories, addCategories, updateCategory, deleteCategory} = useFinance();
    const [editcategory, setEditCategory] = useState(null);
-   const [showForm, setShowForm] = useState(false);
+   const [showAddForm, setShowAddForm] = useState(false);
    const formatMoney = (amount) => {
       if(amount === 0) return "NaN";
       return `₹${Number(amount).toLocaleString()}`};
 
    const handleEdit = (id) => {
-      setShowForm(!showForm);
-      setEditCategory(id);
+      // Toggle: clicking the same card again closes the form
+      setEditCategory(prev => (prev === id ? null : id));
+      setShowAddForm(false); // close Add form if open
    }
    const clearEdit = () => {
       setEditCategory(null);
@@ -58,8 +59,7 @@ const Categories = () => {
                      className="edit-btn" 
                      onClick={() => handleEdit(category.id)}
                   >
-                     {/* {(editcategory !== null) ? "Cancel" : "Edit"} */}
-                     {showForm ? "Cancel" : "Edit"}
+                     {editcategory === category.id ? "Cancel" : "Edit"}
                   </button>
                   <button 
                   className="delete-btn" 
@@ -75,17 +75,23 @@ const Categories = () => {
           ))}
          
         </div>
-        {showForm && (
+        {/* Edit form — shown below the card being edited */}
+        {editcategory !== null && (
             <div className="form-wrapper">
                <CategoryForm categoryToEdit={categoryToEdit} clearEdit={clearEdit}/>
             </div>
          )}
       <button 
             className="add-btn" 
-            onClick={() => setShowForm(!showForm)}
+            onClick={() => { setShowAddForm(prev => !prev); setEditCategory(null); }}
          >
-            {showForm ? "Cancel Transaction" : "+ Add New Category"}
-      </button> 
+            {showAddForm ? "Cancel" : "+ Add New Category"}
+      </button>
+      {showAddForm && (
+         <div className="form-wrapper">
+            <CategoryForm categoryToEdit={null} clearEdit={() => setShowAddForm(false)}/>
+         </div>
+      )}
       </div>
     );
 };
