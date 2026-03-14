@@ -47,12 +47,33 @@ const Dashboard = () => {
       };
    });
 
-   // Colors for Pie Chart segments
-   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
+   const fmt = (n) => `₹${Number(n).toLocaleString()}`;
+   const balance = income - expense;
 
    return (
       <div className="dashboard-container">
          <h2>Financial Overview</h2>
+         
+         {/* ── Summary Cards ── */}
+         <div className="dashboard-stats">
+            <div className="stat-card">
+               <h3>Total Income</h3>
+               <p className="stat-value safe">{fmt(income)}</p>
+            </div>
+            <div className="stat-card">
+               <h3>Total Expenses</h3>
+               <p className="stat-value danger">{fmt(expense)}</p>
+            </div>
+            <div className="stat-card">
+               <h3>Net Balance</h3>
+               <p className={`stat-value ${balance >= 0 ? 'safe' : 'danger'}`}>{fmt(balance)}</p>
+            </div>
+            <div className="stat-card">
+               <h3>Transactions</h3>
+               <p className="stat-value">{transactions.length}</p>
+               <span className="stat-detail">{categories.length} categories</span>
+            </div>
+         </div>
          
          <div className='dashboard-grid'>
             
