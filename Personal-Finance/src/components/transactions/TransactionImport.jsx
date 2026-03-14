@@ -10,22 +10,27 @@ const TransactionImport = () => {
     const fileInputRef = useRef(null);
 
     const handleFileSelect = (event) => {
-        const file = event.target.files[0];
-        if (!file) return;
+        const files = Array.from(event.target.files);
+        if (!files.length) return;
 
         setIsImporting(true);
 
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const text = e.target.result;
-            const parsed = Papa.parse(text, { header: true, dynamicTyping: true });
-            // Filter out any empty trailing rows papaparse may produce
-            const cleanRows = parsed.data.filter(row => row["Amount"] != null);
-            setParsedData(cleanRows);
+        const parseFile = (file) => new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const parsed = Papa.parse(e.target.result, { header: true, dynamicTyping: true });
+                const cleanRows = parsed.data.filter(row => row["Amount"] != null);
+                resolve(cleanRows);
+            };
+            reader.readAsText(file);
+        });
+
+        Promise.all(files.map(parseFile)).then(results => {
+            const merged = results.flat();
+            setParsedData(merged);
             setShowPreview(true);
             setIsImporting(false);
-        };
-        reader.readAsText(file);
+        });
     };
 
     const closePreview = () => {
@@ -40,6 +45,7 @@ const TransactionImport = () => {
             <input
                 type="file"
                 accept=".csv"
+                multiple
                 onChange={handleFileSelect}
                 style={{ display: 'none' }}
                 ref={fileInputRef}
