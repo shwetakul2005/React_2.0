@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFinance } from "../../context/FinanceContext";
+import useCategories from "../../hooks/useCategories";
 import { useToast } from "../ui/Toast";
 import './TransactionForm.css'
 
@@ -11,6 +12,7 @@ const TransactionForm = ({ transactionToEdit = null, onClose }) => {
     const [type, setType] = useState("expense")
 
     const { addTransaction, updateTransaction, categories } = useFinance();
+    const { categories: categoriesWithSpending } = useCategories();
     const toast = useToast();
 
     // Pre-fill form when editing an existing transaction
@@ -30,6 +32,21 @@ const TransactionForm = ({ transactionToEdit = null, onClose }) => {
         if (!description)           { toast.error("Please enter a description"); return }
         if (!category_id)           { toast.error("Please select a category"); return }
         if (!date)                  { toast.error("Please select a date"); return }
+
+        // --- ENFORCE FIXED CATEGORY BUDGET LIMIT ---
+        if (type === "expense") {
+            const selectedCat = categoriesWithSpending.find(c => c.id === Number(category_id));
+            if (selectedCat && selectedCat.type === "fixed") {
+                // If editing, don't count the old amount against the limit
+                const previousAmount = transactionToEdit ? Number(transactionToEdit.amount) : 0;
+                const newTotalSpent = selectedCat.spent - previousAmount + Number(amount);
+                
+                if (newTotalSpent > selectedCat.budgetLimit) {
+                    toast.error(`Cannot exceed fixed budget of ₹${selectedCat.budgetLimit} for ${selectedCat.name}`);
+                    return;
+                }
+            }
+        }
 
         const transactionData = {
             id: transactionToEdit ? transactionToEdit.id : Date.now(),
