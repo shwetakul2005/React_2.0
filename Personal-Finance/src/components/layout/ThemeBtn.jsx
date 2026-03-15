@@ -13,18 +13,18 @@ export default function ThemeBtn() {
     };
 
     return (
-        <label>
-            {/* <input
-                type="checkbox"
-                value=""
-                className="sr-only peer"
-                onChange={onChangeBtn}
-                checked={themeMode==="dark"}
-            /> */}
-            <div></div>
-            {/* <span >Toggle Theme</span> */}
-            <button className="theme-btn" onClick={toggleTheme}>{themeMode === "light" ? "Dark Mode" : "Light Mode"}</button>
-        </label>
+        <button 
+            className={`theme-toggle-btn ${themeMode}`} 
+            onClick={toggleTheme}
+            aria-label="Toggle Theme"
+            title={`Switch to ${themeMode === 'light' ? 'Dark' : 'Light'} Mode`}
+        >
+            {themeMode === "light" ? (
+                <span className="theme-icon">🌙</span> // Moon for switching to dark
+            ) : (
+                <span className="theme-icon">☀️</span> // Sun for switching to light
+            )}
+        </button>
     );
 }
 
