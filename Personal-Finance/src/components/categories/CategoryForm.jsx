@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFinance } from "../../context/FinanceContext";
+import { useToast } from "../ui/Toast";
 import './CategoryForm.css'
 
 const CategoryForm = ({categoryToEdit, clearEdit}) => {
@@ -11,31 +12,28 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
     const [isRecurring, setIsRecurring] = useState(false)
 
     const {addCategory, updateCategory} = useFinance();
+    const toast = useToast();
 
     const handleSubmit = (e) => {
         e.preventDefault()
         // Validation
         if (budgetLimit < 0) {
-            alert("Please enter a valid budgetLimit")
+            toast.error("Please enter a valid budgetLimit")
             return
         }
-        // if (!budgetLimit || budgetLimit <= 0) {
-        //     alert("Please enter a valid budgetLimit")
-        //     return
-        // }
         
         if (!name) {
-            alert("Please enter a name")
+            toast.error("Please enter a category name")
             return
         }
         
         if (!color) {
-            alert("Please select a color")
+            toast.error("Please select a color")
             return
         }
 
         if(type === "fixed" && !dueDate) {
-            alert("Please enter dueDate for Fixed Expense")
+            toast.error("Please enter a due date for Fixed Expenses")
             return
         }
 
@@ -75,10 +73,11 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
             setDueDate("")
             setIsRecurring(false)
             
-            alert("Category updated successfully!")
+            toast.success("Category updated successfully!")
         }
         else{
             addCategory(newCategory)
+            
             // Clear form
             setBudgetLimit("")
             setName("")
@@ -87,7 +86,7 @@ const CategoryForm = ({categoryToEdit, clearEdit}) => {
             setDueDate("")
             setIsRecurring(false)
             
-            alert("Category added successfully!")
+            toast.success("Category added successfully!")
         }
         
         

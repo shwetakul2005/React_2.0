@@ -1,270 +1,149 @@
 /* =========================================
-   Page Wrapper & General Layout
+   Budget Overview - Header & Date Picker
    ========================================= */
-.budget-summary-wrapper {
-  padding: 1rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem; /* Large gap between major sections */
+.budget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
 }
 
-.main-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.budget-header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: var(--text-color);
 }
 
-/* Page Headings */
-h1 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--text-color);
-  border-bottom: 2px solid var(--sidebar-border);
-  padding-bottom: 0.5rem;
+.budget-actions {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-h2 {
-  font-size: 1.25rem;
-  color: var(--text-color);
-  margin-bottom: 1rem;
+/* Make sure the calendar drops down over the page content, not pushing it */
+.budget-calendar-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 100;
+    background: var(--background-color);
+    border: 1px solid var(--sidebar-border);
+    border-radius: 12px;
+    padding: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 /* =========================================
-   Header Summary Section (Date + Cards)
+   Stat Card Mini Progress Bar
    ========================================= */
-.header-summary-sec {
-  display: grid;
-  /* Adjusts so the date card stays compact while stats grow */
-  grid-template-columns: auto repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  align-items: start;
-}
-
-@media (max-width: 1100px) {
-  .header-summary-sec {
-    grid-template-columns: 1fr;
-  }
-  .date-card {
-    max-width: 100% !important;
+.budget-progress-mini {
     width: 100%;
-  }
+    height: 6px;
+    background: var(--sidebar-bg);
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    overflow: hidden;
 }
 
-/* Stat Cards Base */
-.header-summary-sec > div {
-  background-color: var(--background-color);
-  border: 1px solid var(--sidebar-border);
-  border-radius: 12px;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
-  border-left: 5px solid transparent;
+.budget-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
 }
 
-.header-summary-sec > div:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
+.bg-safe   { background-color: var(--color-safe, #16a34a); }
+.bg-warn   { background-color: #eab308; }
+.bg-danger { background-color: var(--color-danger, #ef4444); }
 
-.stat-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--sidebar-text);
-  line-height: 1.4;
-}
+/* Accent borders for cards */
+.alert-safe   { border-left: 3px solid var(--color-safe, #16a34a); }
+.alert-warn   { border-left: 3px solid #eab308; }
+.alert-danger { border-left: 3px solid var(--color-danger, #ef4444); }
 
-.stat-value {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--text-color);
-}
+/* Text colors */
+.stat-value.safe   { color: var(--color-safe, #16a34a); }
+.stat-value.warn   { color: #eab308; }
+.stat-value.danger { color: var(--color-danger, #ef4444); }
 
-/* =========================================
-   Category Wise Lists (Bottom Grid)
-   ========================================= */
-.category-wise-bl {
-  display: grid;
-  /* Creates two distinct columns for Fixed and Variable */
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-
-@media (max-width: 850px) {
-  .category-wise-bl {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Individual List Column Spacing */
-.category-wise-bl > div {
-  background: var(--sidebar-bg);
-  padding: 1.5rem;
-  border-radius: 16px;
-  min-height: 400px;
+.section-title {
+    margin: 0 0 1.5rem;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--sidebar-border);
 }
 
 /* =========================================
-   Progress Bar Styling
+   Alerts Container Inside Card
    ========================================= */
-.progress-section {
-  background: var(--background-color);
-  padding: 1.5rem;
-  border-radius: 12px;
-  border: 1px solid var(--sidebar-border);
+.budget-alerts-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
-.progress-labels {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-color);
+.budget-alerts-wrapper > * {
+    flex: 1 1 300px;
 }
 
-.progress-track {
-  width: 100%;
-  height: 16px;
-  background-color: var(--sidebar-border);
-  border-radius: 20px;
-  overflow: hidden;
-}
+.mb-4 { margin-bottom: 2rem; }
 
-.progress-fill {
-  height: 100%;
-  border-radius: 20px;
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+/* =========================================
+   Mobile Overrides
+   ========================================= */
+@media (max-width: 768px) {
+    .budget-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .budget-calendar-dropdown {
+        left: 0;
+        right: auto;
+    }
+
+    .budget-alerts-wrapper {
+        flex-direction: column;
+    }
 }
 
 /* =========================================
-   Date Picker Overrides
+   Date Picker Deep Overrides
    ========================================= */
-.date-card {
-  max-width: 220px;
-  background-color: var(--background-color);
-  border: 1px solid var(--sidebar-border);
-  border-radius: 12px;
-  padding: 0.5rem;
+.budget-calendar-dropdown .rdrDefinedRangesWrapper {
+    background: transparent !important;
+    border: none !important;
 }
 
-/* =========================================
-   Status & Colors (Scoped)
-   ========================================= */
-:root {
-  --color-safe: #16a34a;
-  --color-warning: #ea580c;
-  --color-danger: #dc2626;
+.budget-calendar-dropdown .rdrStaticRange {
+    background: transparent !important;
+    border-bottom: 1px solid var(--sidebar-border) !important;
 }
 
-html.dark {
-  --color-safe: #22c55e;
-  --color-warning: #f97316;
-  --color-danger: #ef4444;
+.budget-calendar-dropdown .rdrStaticRange:last-child {
+    border-bottom: none !important;
 }
 
-/* Card Accents */
-.summary-card.neutral { border-left-color: var(--nav-title-color); }
-.summary-card.status-safe { border-left-color: var(--color-safe); }
-.summary-card.status-warning { border-left-color: var(--color-warning); }
-.summary-card.status-danger { border-left-color: var(--color-danger); }
-
-/* Value/Text Colors */
-.status-safe, .summary-card.status-safe .stat-value { color: var(--color-safe); }
-.status-warning, .summary-card.status-warning .stat-value { color: var(--color-warning); }
-.status-danger, .summary-card.status-danger .stat-value { color: var(--color-danger); }
-
-.progress-fill.status-safe { background-color: var(--color-safe); }
-.progress-fill.status-warning { background-color: var(--color-warning); }
-.progress-fill.status-danger { background-color: var(--color-danger); }
-
-/* Library Button Styling */
-.rdrStaticRangeSelected .rdrStaticRangeLabel {
-  background-color: var(--nav-title-color) !important;
-  color: #ffffff !important;
+.budget-calendar-dropdown .rdrStaticRangeLabel {
+    color: var(--sidebar-text) !important;
 }
 
-/* =========================================
-   The Date Card Container
-   ========================================= */
-.date-card {
-  display: flex !important;
-  justify-content: center !important;
-  background-color: var(--background-color) !important;
-  border: 1px solid var(--sidebar-border) !important;
-  border-radius: 12px !important;
-  padding: 8px !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
-  max-width: 220px !important; 
-  height: fit-content !important;
+.budget-calendar-dropdown .rdrStaticRange:hover .rdrStaticRangeLabel {
+    background: var(--sidebar-hover-bg) !important;
+    color: var(--text-color) !important;
 }
 
-/* =========================================
-   Deep Overrides for DefinedRange Library
-   ========================================= */
-
-/* Targeting the specific library class names with higher specificity */
-.date-card .rdrDefinedRangesWrapper {
-  background: transparent !important;
-  border: none !important;
-  width: 100% !important;
+.budget-calendar-dropdown .rdrStaticRangeSelected .rdrStaticRangeLabel {
+    background: var(--nav-title-color) !important;
+    color: #fff !important;
+    font-weight: bold !important;
 }
 
-/* Individual list items (Today, Yesterday, etc.) */
-.date-card .rdrStaticRange {
-  background: transparent !important;
-  border-bottom: 1px solid var(--sidebar-border) !important;
-  cursor: pointer !important;
+html.dark .budget-calendar-dropdown {
+    background: #1e1e1e !important;
 }
 
-.date-card .rdrStaticRange:last-child {
-  border-bottom: none !important;
-}
-
-/* The label text inside the buttons */
-.date-card .rdrStaticRangeLabel {
-  background: transparent !important;
-  color: var(--sidebar-text) !important;
-  padding: 10px 15px !important;
-  font-size: 0.85rem !important;
-  font-family: 'Inter', sans-serif !important;
-  font-weight: 500 !important;
-  transition: all 0.2s ease !important;
-}
-
-/* Hover effect */
-.date-card .rdrStaticRange:hover .rdrStaticRangeLabel {
-  background-color: var(--sidebar-hover-bg) !important;
-  color: var(--text-color) !important;
-}
-
-/* ACTIVE / SELECTED ITEM (The main change) */
-/* We target the specific 'Selected' class the library adds */
-.date-card .rdrStaticRangeSelected .rdrStaticRangeLabel {
-  background-color: var(--nav-title-color) !important;
-  color: #ffffff !important;
-  font-weight: 700 !important;
-}
-
-/* =========================================
-   Dark Mode Specific Overrides
-   ========================================= */
-html.dark .date-card {
-  background-color: #1E1E1E !important; /* Force the deep black */
-}
-
-html.dark .date-card .rdrStaticRangeSelected .rdrStaticRangeLabel {
-  /* In dark mode, Koopa Green Shell text should be dark for contrast */
-  color: #060C06 !important; 
-}
-
-html.dark .date-card .rdrStaticRangeLabel {
-  color: #F0F2F0 !important;
+html.dark .budget-calendar-dropdown .rdrStaticRangeSelected .rdrStaticRangeLabel {
+    color: #000 !important;
 }

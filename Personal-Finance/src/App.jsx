@@ -11,11 +11,13 @@ import Categories from './pages/Categories'
 import Insights from './pages/Insights'
 import Reports from './pages/Reports'
 import Dashboard from './pages/Dashboard'
+import { ToastProvider } from './components/ui/Toast'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
+    <ToastProvider>
     <FinanceContextProvider>
 
         <Layout>
@@ -31,6 +33,7 @@ function App() {
   
     
     </FinanceContextProvider>
+    </ToastProvider>
     
   )
 }

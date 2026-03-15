@@ -1,4 +1,3 @@
-// Products.js
 import { useNavigate } from 'react-router-dom';
 import useCategories from '../hooks/useCategories';
 import { useFinance } from '../context/FinanceContext';
@@ -10,7 +9,6 @@ import useTransactions from '../hooks/useTransactions';
 import { startOfMonth, format } from 'date-fns';
 import BudgetAlerts from '../components/budget/BudgetAlerts';
 
- 
 const Budget = () => {
    const navigate = useNavigate();
    const {totalSpent, categoriesOverBudget} = useCategories();
@@ -25,132 +23,99 @@ const Budget = () => {
     const { startDate, endDate } = state[0];
     const [showCalender, setShowCalender] = useState(false);
    const { 
-        transactions: filteredTransactions,  // The filtered array
-        totalExpense,                        // Already calculated by hook
+        transactions: filteredTransactions,
+        totalExpense,
         totalIncome,
         balance 
         } = useTransactions({date:state})
-   
 
-    // Sum budgets for ALL categories, regardless of transactions
     const totalBudget = categories.reduce((sum, cat) => {
         return sum + (cat.budgetLimit || 0)
     }, 0)
 
-   // 1. Calculate the percentage
-   console.log("e", totalExpense)
-   console.log("s", totalSpent)
-   const percentUsed = totalBudget >= 0 
+   const percentUsed = totalBudget > 0 
       ? Math.min(100, Math.round((totalExpense / totalBudget) * 100)) 
       : 0;
 
-   // 2. Determine Color Status based on your rules
-   let statusClass = "status-safe"; // Default Green (< 70%)
-   if (percentUsed >= 90) {
-      statusClass = "status-danger"; // Red (> 90%)
-   } else if (percentUsed >= 70) {
-      statusClass = "status-warning"; // Orange (70-90%)
-   }
+   let statusClass = "safe"; 
+   if (percentUsed >= 90) statusClass = "danger"; 
+   else if (percentUsed >= 70) statusClass = "warn"; 
 
-   // 3. Determine Remaining Balance Status
    const remaining = totalBudget - totalExpense;
-   const remainingClass = remaining < 0 ? "status-danger" : "status-safe";
+   const remainingClass = remaining < 0 ? "danger" : "safe";
+
+   const fmt = (n) => `₹${Number(n).toLocaleString()}`;
 
 return (
-   <div className="budget-summary-wrapper">
-        <h1>Budget Overview</h1>
-        <div className='header-summary-sec'>
-            
-            {/* Total Budget (Neutral) */}
-            <div className='summary-card neutral'>
-                <span className="stat-label">Total Budget</span>
-                <span className="stat-value">₹{totalBudget}</span>
-            </div>
-
-            {/* Total Spent (Dynamic Color) */}
-            <div className={`summary-card ${statusClass}`}>
-                <span className="stat-label">{`Total Spent from ${format(startDate, 'MMM d')} to ${format(endDate, 'MMM d, yyyy')}`}</span>
-                {/* {console.log(`total spent in box: ${totalSpent}`)} */}
-                <span className="stat-value">₹{totalExpense}</span>
-            </div>
-
-            {/* Remaining (Green/Red) */}
-            <div className={`summary-card ${remainingClass}`}>
-                <span className="stat-label">Current Remaining Budget</span>
-                <span className="stat-value">₹{remaining}</span>
+   <div className="page_content">
+        <div className="budget-header">
+            <h1>Budget Overview</h1>
+            <div className="budget-actions">
+                <button className="add-btn" onClick={() => setShowCalender(!showCalender)}>
+                    {showCalender ? "Hide Calendar" : "Select Date Range"}
+                </button>
+                {showCalender && (
+                    <div className="budget-calendar-dropdown">
+                        <DefinedRange
+                            onChange={item => setState([item.selection])}
+                            ranges={state}
+                            showSelectionPreview={true}
+                        />
+                    </div>
+                )}
             </div>
         </div>
 
-        {/*  Progress Bar Section  */}
-        <div className="progress-section">
-            <div className="progress-labels">
-                <span>Overall Budget Progress</span>
-                <span className={statusClass}>{percentUsed}% Used</span>
+        {/* ── Summary Stats (Match Dashboard style) ── */}
+        <div className="dashboard-stats">
+            <div className="stat-card">
+                <h3>Total Budget</h3>
+                <p className="stat-value">{fmt(totalBudget)}</p>
+                <span className="stat-detail">Across {categories.filter(c => c.budgetLimit > 0).length} categories</span>
             </div>
-            
-            <div className="progress-track">
-                <div 
-                    className={`progress-fill ${statusClass}`} 
-                    style={{ width: `${percentUsed}%` }}
-                ></div>
+
+            <div className={`stat-card alert-${statusClass}`}>
+                <h3>Total Spent</h3>
+                <p className={`stat-value ${statusClass}`}>{fmt(totalExpense)}</p>
+                <span className="stat-detail">{format(startDate, 'MMM d')} - {format(endDate, 'MMM d')}</span>
             </div>
-        </div>
 
-        <button 
-            className="add-btn" 
-            onClick={() => setShowCalender(!showCalender)}>
-            {showCalender ? "Hide" : "+ Select Date Range"}
-        </button>
-        <div className="date-card">
-            {showCalender && (
-                <div className="form-wrapper">
-                    <DefinedRange
-                        onChange={item => {
-                            const dateName = item;
-                            setState([item.selection])
-                        }}
-                        ranges={state}
-                        showSelectionPreview={true}
-                    />
-                        
-                </div>
-            )}
-                
-        </div>
-        <div>
-            <h1>Alerts</h1>
-                <BudgetAlerts 
-                startDate={startDate}  
-                endDate={endDate}
-                type={"fixed"}/>
+            <div className={`stat-card alert-${remainingClass}`}>
+                <h3>Remaining Budget</h3>
+                <p className={`stat-value ${remainingClass}`}>{fmt(remaining)}</p>
+                <span className="stat-detail">{remaining < 0 ? 'Over budget' : 'Under budget'}</span>
+            </div>
 
-                 <BudgetAlerts 
-                startDate={startDate}  
-                endDate={endDate}
-                type={"variable"}/>
-        </div>
-        <div className='main-content'>
-            <h1>{`Category wise budget status from ${format(startDate, 'MMM d')} to ${format(endDate, 'MMM d, yyyy')}`}</h1>
-            
-            <div className='category-wise-bl'>
-                <div>
-                    <h2>Fixed Category List:</h2>
-                    <BudgetList 
-                    startDate={startDate}  
-                    endDate={endDate} 
-                    type={"fixed"}      
-                    />
-                </div>
-                <div>
-                    <h2>Variable Category List</h2>
-                    <BudgetList 
-                    startDate={startDate}  
-                    endDate={endDate} 
-                    type={"variable"}      
-                    />
+            <div className={`stat-card alert-${statusClass}`}>
+                <h3>Overall Progress</h3>
+                <p className={`stat-value ${statusClass}`}>{percentUsed}%</p>
+                <div className="budget-progress-mini">
+                    <div className={`budget-progress-fill bg-${statusClass}`} style={{ width: `${percentUsed}%` }}></div>
                 </div>
             </div>
+        </div>
 
+        {/*  Alerts Section  */}
+        <div className="chart-card mb-4" style={{ padding: '1.5rem' }}>
+            <h2 className="section-title" style={{ marginBottom: '1.5rem' }}>Active Alerts</h2>
+            <div className="budget-alerts-wrapper">
+                <BudgetAlerts startDate={startDate} endDate={endDate} type="fixed" />
+                <BudgetAlerts startDate={startDate} endDate={endDate} type="variable" />
+            </div>
+        </div>
+
+        {/* Category Wise Status */}
+        <h2 className="section-title">Category Status ({format(startDate, 'MMM d')} - {format(endDate, 'MMM d')})</h2>
+        <div className="dashboard-grid">
+            <div className="chart-card">
+                <h3>Fixed Categories</h3>
+                <BudgetList startDate={startDate} endDate={endDate} type="fixed" />
+            </div>
+            
+            <div className="chart-card">
+                <h3>Variable Categories</h3>
+                <BudgetList startDate={startDate} endDate={endDate} type="variable" />
+            </div>
         </div>
    </div>
 );

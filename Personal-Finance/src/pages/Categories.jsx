@@ -2,12 +2,14 @@ import {useState} from "react";
 // import { useEffect } from "react";
 import CategoryForm from "../components/categories/CategoryForm";
 import { useFinance } from "../context/FinanceContext";
-import './Categories.css'; // Assuming you save the CSS above in Categories.css
+import ConfirmModal from "../components/ui/ConfirmModal";
+import './Categories.css';
 
 const Categories = () => {
    const {categories, addCategories, updateCategory, deleteCategory} = useFinance();
    const [editcategory, setEditCategory] = useState(null);
    const [showAddForm, setShowAddForm] = useState(false);
+   const [categoryToDelete, setCategoryToDelete] = useState(null);
    const formatMoney = (amount) => {
       if(amount === 0) return "NaN";
       return `₹${Number(amount).toLocaleString()}`};
@@ -72,12 +74,7 @@ const Categories = () => {
                     </button>
                     <button 
                       className="delete-btn" 
-                      onClick={() => {
-                        const isConfirmed = confirm(`Are you sure you want to delete ${category.name} category?`);
-                        if (isConfirmed) {
-                          deleteCategory(category.id);
-                        }
-                      }}
+                      onClick={() => setCategoryToDelete(category)}
                     >
                       Delete
                     </button>
@@ -105,8 +102,19 @@ const Categories = () => {
             <CategoryForm categoryToEdit={null} clearEdit={() => setShowAddForm(false)}/>
          </div>
       )}
+
+      {categoryToDelete && (
+          <ConfirmModal
+              message={`Are you sure you want to delete the "${categoryToDelete.name}" category?`}
+              onConfirm={() => {
+                  deleteCategory(categoryToDelete.id);
+                  setCategoryToDelete(null);
+              }}
+              onCancel={() => setCategoryToDelete(null)}
+          />
+      )}
       </div>
     );
 };
- 
+ 
 export default Categories;

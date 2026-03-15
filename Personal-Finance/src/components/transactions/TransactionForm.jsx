@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFinance } from "../../context/FinanceContext";
+import { useToast } from "../ui/Toast";
 import './TransactionForm.css'
 
 const TransactionForm = ({ transactionToEdit = null, onClose }) => {
@@ -10,6 +11,7 @@ const TransactionForm = ({ transactionToEdit = null, onClose }) => {
     const [type, setType] = useState("expense")
 
     const { addTransaction, updateTransaction, categories } = useFinance();
+    const toast = useToast();
 
     // Pre-fill form when editing an existing transaction
     useEffect(() => {
@@ -24,10 +26,10 @@ const TransactionForm = ({ transactionToEdit = null, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (!amount || amount <= 0) { alert("Please enter a valid amount"); return }
-        if (!description)           { alert("Please enter a description"); return }
-        if (!category_id)           { alert("Please select a category"); return }
-        if (!date)                  { alert("Please select a date"); return }
+        if (!amount || amount <= 0) { toast.error("Please enter a valid amount"); return }
+        if (!description)           { toast.error("Please enter a description"); return }
+        if (!category_id)           { toast.error("Please select a category"); return }
+        if (!date)                  { toast.error("Please select a date"); return }
 
         const transactionData = {
             id: transactionToEdit ? transactionToEdit.id : Date.now(),
@@ -40,8 +42,10 @@ const TransactionForm = ({ transactionToEdit = null, onClose }) => {
 
         if (transactionToEdit) {
             updateTransaction(transactionToEdit.id, transactionData)
+            toast.success("Transaction updated!");
         } else {
             addTransaction(transactionData)
+            toast.success("Transaction added!");
         }
 
         // Reset form

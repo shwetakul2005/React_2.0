@@ -1,13 +1,15 @@
 import React from "react";
+import { useState } from "react";
 import { useFinance } from "../../context/FinanceContext";
 import useTransactions from "../../hooks/useTransactions";
 import { TransactionItem } from "./TransactionItem";
+import ConfirmModal from "../ui/ConfirmModal";
 import './TransactionList.css'
 
 // const TransactionList = (props) => {
 //     const filtered_transactions = props.transactions;
 //     const {deleteTransaction, categories } = useFinance();
-    
+
 //     const cat_name = (cat_id) => {
 //         const sele_cat = categories.find(cat => cat.id == cat_id);
 //         return sele_cat?.name
@@ -55,7 +57,7 @@ import './TransactionList.css'
 //                     Delete
 //                  </button>
 //              </div>
-            
+
 //         ))}
 
 //         </>
@@ -67,13 +69,14 @@ import './TransactionList.css'
 
 const TransactionList = ({ transactions: filtered_transactions, onEdit }) => {
     const { deleteTransaction, categories } = useFinance();
-    
+    const [transactionToDelete, setTransactionToDelete] = useState(null);
+
     const cat_name = (cat_id) => {
         const sele_cat = categories.find(cat => cat.id == cat_id);
         return sele_cat?.name
     }
 
-    if (!filtered_transactions || filtered_transactions.length === 0){
+    if (!filtered_transactions || filtered_transactions.length === 0) {
         return <p className="no-data">No transactions yet. Add your first one!</p>
     }
 
@@ -83,7 +86,7 @@ const TransactionList = ({ transactions: filtered_transactions, onEdit }) => {
         <div className="transactions-list-vertical">
             {filtered_transactions.map((transaction) => (
                 <div key={transaction.id} className="transaction-row">
-                    
+
                     {/* Left Section: Icon & Info */}
                     <div className="t-info-group">
                         <div className={`t-type-indicator ${transaction.type}`}>
@@ -109,14 +112,10 @@ const TransactionList = ({ transactions: filtered_transactions, onEdit }) => {
                         >
                             ✏️
                         </button>
-                        <button 
+                        <button
                             className="btn-delete"
                             title="Delete Transaction"
-                            onClick={() => {
-                                if (confirm("Delete this transaction?")) {
-                                    deleteTransaction(transaction.id);
-                                }
-                            }}
+                            onClick={() => setTransactionToDelete(transaction)}
                         >
                             Delete
                         </button>
@@ -124,6 +123,17 @@ const TransactionList = ({ transactions: filtered_transactions, onEdit }) => {
 
                 </div>
             ))}
+
+            {transactionToDelete && (
+                <ConfirmModal
+                    message="Are you sure you want to delete this transaction?"
+                    onConfirm={() => {
+                        deleteTransaction(transactionToDelete.id);
+                        setTransactionToDelete(null);
+                    }}
+                    onCancel={() => setTransactionToDelete(null)}
+                />
+            )}
         </div>
     );
 };

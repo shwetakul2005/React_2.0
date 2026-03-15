@@ -69,7 +69,7 @@ const BudgetList = ({ startDate, endDate, type }) => {
     }
 
     return (
-        <div className="budget-list-grid">
+        <div className="budget-category-list">
             {categories.map((cat) =>{                
                 if(cat.budgetLimit <=0 ) {
                     return ;
